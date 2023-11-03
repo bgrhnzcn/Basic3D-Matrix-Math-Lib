@@ -1,16 +1,16 @@
 INCLUDES = -I/usr/include -Imlx
 
-INCLUDES_MAC = -Imlx
+INCLUDES_MAC = -I .
 
 NAME = fdf
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra 
 
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lft -lftprintf
 
-MLX_FLAGS_MAC = -L . -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS_MAC = -L . -lmlx -lft -lftprintf -framework OpenGL -framework AppKit
 
 SRCS = main.c
 
