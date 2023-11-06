@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   vector_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:58:24 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/04 22:45:43 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/06 22:16:25 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	vec_add(t_vec3 *vec1, t_vec3 vec2)
-{
-	vec1->x += vec2.x;
-	vec1->y += vec2.y;
-	vec1->z += vec2.z;
-}
-
-t_vec3	*vec_add(t_vec3 *vec1, t_vec3 vec2)
-{
-	t_vec3	*res;
-	
-	res = malloc(sizeof(t_vec3));
-	if (res == NULL)
-		return (NULL);
-	vec1->x += vec2.x;
-	vec1->y += vec2.y;
-	vec1->z += vec2.z;
-}
 
 double	get_dist(t_vec3 point1, t_vec3 point2)
 {
@@ -43,6 +24,16 @@ double	get_dist(t_vec3 point1, t_vec3 point2)
 	return (sqrt(pow(dist_x, 2) * pow(dist_y, 2) * pow(dist_z, 2)));
 }
 
+double	vec_mag(t_vec3 vec)
+{
+	t_vec3	vec_null;
+
+	vec_null.x = 0;
+	vec_null.y = 0;
+	vec_null.z = 0;
+	return (get_dist(vec_null, vec));
+}
+
 double	dot_prod3(t_vec3 vec1, t_vec3 vec2)
 {
 	double	res;
@@ -53,4 +44,3 @@ double	dot_prod3(t_vec3 vec1, t_vec3 vec2)
 	res += vec1.z * vec2.z;
 	return (res);
 }
-
