@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:57:53 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/06 22:11:12 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/07 14:57:31 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ t_vec3	get_row(t_mtx3 mtx, int row_val)
 	t_vec3	vec_res;
 
 	if (row_val == 1)
-		vec_res = set_vec3(mtx.col1.x, mtx.col2.x, mtx.col3.x);
+		vec_res = vec3_set(mtx.col1.x, mtx.col2.x, mtx.col3.x);
 	else if (row_val == 2)
-		vec_res = set_vec3(mtx.col1.y, mtx.col2.y, mtx.col3.y);
+		vec_res = vec3_set(mtx.col1.y, mtx.col2.y, mtx.col3.y);
 	else if (row_val == 3)
-		vec_res = set_vec3(mtx.col1.z, mtx.col2.z, mtx.col3.z);
+		vec_res = vec3_set(mtx.col1.z, mtx.col2.z, mtx.col3.z);
 	else
-		vec_res = set_vec3(0, 0, 0);
+		vec_res = vec3_set(0, 0, 0);
 	return (vec_res);
 }
 

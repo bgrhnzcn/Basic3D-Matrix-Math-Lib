@@ -1,4 +1,4 @@
-INCLUDES = -I/usr/include -Imlx
+INCLUDES = -I/usr/include -Imlx -I./
 
 INCLUDES_MAC = -I .
 
@@ -8,7 +8,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra 
 
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lft -lftprintf
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 
 MLX_FLAGS_MAC = -L . -lmlx -lft -lftprintf -framework OpenGL -framework AppKit
 
@@ -17,10 +17,10 @@ SRCS = main.c
 OBJ = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $(INCLUDES_MAC) $?
+	$(CC) $(CFLAGS) -c $(INCLUDES) $?
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_FLAGS_MAC)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_FLAGS)
 
 all: $(NAME)
 

@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_2.c                                         :+:      :+:    :+:   */
+/*   vec3_vec3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:17:40 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/06 22:16:19 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/07 14:23:29 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_vec3	cross_prod3(t_vec3 vec1, t_vec3 vec2)
+t_vec3	vec3_inv(t_vec3 vec)
+{
+	t_vec3	vec3_res;
+
+	vec3_res.x = -vec.x;
+	vec3_res.y = -vec.y;
+	vec3_res.z = -vec.z;
+	return (vec3_res);
+}
+
+t_vec3	vec3_cross(t_vec3 vec1, t_vec3 vec2)
 {
 	t_vec3	vec_res;
 	vec_res.x = (vec1.y * vec2.z) - (vec1.z * vec2.y);
@@ -21,11 +31,7 @@ t_vec3	cross_prod3(t_vec3 vec1, t_vec3 vec2)
 	return (vec_res);
 }
 
-t_vec3	vec_normalize(t_vec3 vec)
+t_vec3	vec3_norm(t_vec3 vec)
 {
-	t_vec3	vec_res;
-
-	vec_res = vec_div(vec, vec_mag(vec));
-	return (vec_res);
+	return (vec3_div(vec, vec3_mag(vec)));
 }
-

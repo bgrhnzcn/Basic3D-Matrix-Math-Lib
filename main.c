@@ -3,35 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 21:54:01 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/06 22:47:35 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/08 01:05:37 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-double map(double x, double min_i, double max_i, double min_o, double max_o)
-{
-  return (((x - min_i) * (max_o - min_o)) / (max_i - min_i)) + min_o;
-}
-
 int	main(void)
 {
-	t_mtx3	mtx_test = {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}};
-	t_mtx3	mtx_test2 = {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}};
-	t_mtx3	mtx_res;
-	mtx_res = mtx_mtx_mul3(mtx_test, mtx_test2);
-	//t_vec3	vec_test = {1, 2, 3};
-	//t_vec3	res;
-	//res = cross_prod3(mtx_test.col1, vec_test);
-	//mtx_vec_mul3(mtx_test, &vec_test);
-	printf("col1  x: %f, y: %f, z: %f\n", mtx_res.col1.x, mtx_res.col1.y, mtx_res.col1.z);
-	printf("col2  x: %f, y: %f, z: %f\n", mtx_res.col2.x, mtx_res.col2.y, mtx_res.col2.z);
-	printf("col3  x: %f, y: %f, z: %f\n", mtx_res.col3.x, mtx_res.col3.y, mtx_res.col3.z);
-	printf("map-in: %f, map-out: %f\n", (double)300, map(300, 200, 500, 10, 20));
-	//printf("%f\n", deg_to_rad(rad_to_deg(2 * M_PI)));
-	//system("leaks fdf");
+	t_data	data;
+	t_vec3	points[8];
+	t_mtx3	orto;
+	int		i;
+
+	i = 0;
+	orto = orto_init();
+	data.points_size = 8;
+	points[0] = vec3_set(100, 100, 100);
+	points[1] = vec3_set(100, 100, 200);
+	points[2] = vec3_set(100, 200, 100);
+	points[3] = vec3_set(100, 200, 200);
+	points[4] = vec3_set(200, 100, 100);
+	points[5] = vec3_set(200, 100, 200);
+	points[6] = vec3_set(200, 200, 100);
+	points[7] = vec3_set(200, 200, 200);
+	while (i < data.points_size)
+	{
+		points[i] = mtx3_rot(0, 0, 90, points[i]);
+		points[i] = mtx_vec_mul3(orto, points[i]);
+		i++;
+	}
+	data.points = points;
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 500, 500, "Test");
+	data.img.img = mlx_new_image(data.mlx, 500, 500);
+	data.img.data = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
+			&data.img.size_line, &data.img.endian);
+	draw_image(&data);
+	mlx_loop(data.mlx);
+	system("leaks fdf");
 	return (0);
 }

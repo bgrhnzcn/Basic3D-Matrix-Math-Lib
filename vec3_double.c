@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_1.c                                         :+:      :+:    :+:   */
+/*   vec3_double.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:58:24 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/06 22:16:25 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/07 14:03:24 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-double	get_dist(t_vec3 point1, t_vec3 point2)
+double	get_dist3(t_vec3 point1, t_vec3 point2)
 {
 	double	dist_x;
 	double	dist_y;
@@ -24,17 +24,17 @@ double	get_dist(t_vec3 point1, t_vec3 point2)
 	return (sqrt(pow(dist_x, 2) * pow(dist_y, 2) * pow(dist_z, 2)));
 }
 
-double	vec_mag(t_vec3 vec)
+double	vec3_mag(t_vec3 vec)
 {
 	t_vec3	vec_null;
 
 	vec_null.x = 0;
 	vec_null.y = 0;
 	vec_null.z = 0;
-	return (get_dist(vec_null, vec));
+	return (get_dist3(vec_null, vec));
 }
 
-double	dot_prod3(t_vec3 vec1, t_vec3 vec2)
+double	vec3_dot(t_vec3 vec1, t_vec3 vec2)
 {
 	double	res;
 

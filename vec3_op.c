@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_op.c                                        :+:      :+:    :+:   */
+/*   vec3_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:22:36 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/06 22:00:30 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/07 13:15:02 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_vec3	set_vec3(double x, double y, double z)
+t_vec3	vec3_set(double x, double y, double z)
 {
 	t_vec3	vec_res;
 
@@ -22,7 +22,7 @@ t_vec3	set_vec3(double x, double y, double z)
 	return (vec_res);
 }
 
-t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2)
+t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2)
 {
 	t_vec3	vec_res;
 	
@@ -32,7 +32,7 @@ t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2)
 	return (vec_res);
 }
 
-t_vec3	vec_sub(t_vec3	vec1, t_vec3 vec2)
+t_vec3	vec3_sub(t_vec3	vec1, t_vec3 vec2)
 {
 	t_vec3	vec_res;
 
@@ -42,7 +42,7 @@ t_vec3	vec_sub(t_vec3	vec1, t_vec3 vec2)
 	return (vec_res);
 }
 
-t_vec3	vec_mul(t_vec3 vec, double mul)
+t_vec3	vec3_mul(t_vec3 vec, double mul)
 {
 	t_vec3	vec_res;
 
@@ -52,7 +52,7 @@ t_vec3	vec_mul(t_vec3 vec, double mul)
 	return (vec_res);
 }
 
-t_vec3	vec_div(t_vec3 vec, double div)
+t_vec3	vec3_div(t_vec3 vec, double div)
 {
 	t_vec3	vec_res;
 
