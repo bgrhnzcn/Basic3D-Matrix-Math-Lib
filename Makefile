@@ -6,7 +6,7 @@ NAME = fdf
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -g -Wall -Werror -Wextra
 
 MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 

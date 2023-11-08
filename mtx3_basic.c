@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.c                                           :+:      :+:    :+:   */
+/*   mtx3_basic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:57:53 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/07 14:57:31 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/08 20:55:06 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_vec3	get_row(t_mtx3 mtx, int row_val)
+t_vec3	get_row3(t_mtx3 mtx, int row_val)
 {
 	t_vec3	vec_res;
 
@@ -27,7 +27,7 @@ t_vec3	get_row(t_mtx3 mtx, int row_val)
 	return (vec_res);
 }
 
-void	set_row(t_mtx3 *mtx, int row_val, t_vec3 row)
+void	set_row3(t_mtx3 *mtx, int row_val, t_vec3 row)
 {
 	if (row_val == 1)
 	{
@@ -69,8 +69,8 @@ t_mtx3	mtx_mtx_mul3(t_mtx3 mtx1, t_mtx3 mtx2)
 {
 	t_mtx3	mtx_res;
 
-	set_row(&mtx_res, 1, mtx_vec_mul3(mtx2, get_row(mtx1, 1)));
-	set_row(&mtx_res, 2, mtx_vec_mul3(mtx2, get_row(mtx1, 2)));
-	set_row(&mtx_res, 3, mtx_vec_mul3(mtx2, get_row(mtx1, 3)));
+	set_row3(&mtx_res, 1, mtx_vec_mul3(mtx2, get_row3(mtx1, 1)));
+	set_row3(&mtx_res, 2, mtx_vec_mul3(mtx2, get_row3(mtx1, 2)));
+	set_row3(&mtx_res, 3, mtx_vec_mul3(mtx2, get_row3(mtx1, 3)));
 	return (mtx_res);
 }

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_mtx.c                                        :+:      :+:    :+:   */
+/*   vec_conv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 15:53:25 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/07 15:56:09 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 2023/11/08 19:44:26 by bgrhnzcn          #+#    #+#             */
+/*   Updated: 2023/11/08 20:28:13 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_mtx3	orto_init(void)
+t_vec4	vec3_to_vec4(t_vec3 vec3, double w)
 {
-	t_mtx3	mtx;
-	t_vec3	col1;
-	t_vec3	col2;
-	t_vec3	col3;
+	return (vec4_set(vec3.x, vec3.y, vec3.z, w));
+}
 
-	col1 = vec3_set(1, 0, 0);
-	col2 = vec3_set(0, 1, 0);
-	col3 = vec3_set(0, 0, 0);
-	mtx.col1 = col1;
-	mtx.col2 = col2;
-	mtx.col3 = col3;
-	return (mtx);
+t_vec3	vec4_to_vec3(t_vec4 vec4)
+{
+	return(vec3_set(vec4.x, vec4.y, vec4.z));
 }

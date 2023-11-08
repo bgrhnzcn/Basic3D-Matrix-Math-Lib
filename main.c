@@ -5,43 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 21:54:01 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/08 01:05:37 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 0.523/11/03 21:54:01 by buozcan           #+#    #+#             */
+/*   Updated: 0.523/11/08 22:29:49 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+t_tri	*tris_init(void)
+{
+	t_tri	*temp;
+
+	temp = malloc(sizeof(t_tri) * 6);
+	temp[0].p1 = vec3_set(-0.5, 0.5, -0.5);
+	temp[0].p2 = vec3_set(-0.5, -0.5, -0.5);
+	temp[0].p3 = vec3_set(0.5, -0.5, -0.5);
+
+	temp[1].p1 = vec3_set(-0.5, 0.5, -0.5);
+	temp[1].p2 = vec3_set(0.5, -0.5, -0.5);
+	temp[1].p3 = vec3_set(0.5, 0.5, -0.5);
+
+	temp[2].p1 = vec3_set(-0.5, -0.5, -0.5);
+	temp[2].p2 = vec3_set(-0.5, -0.5, 0.5);
+	temp[2].p3 = vec3_set(0.5, -0.5, 0.5);
+
+	temp[3].p1 = vec3_set(-0.5, -0.5, -0.5);
+	temp[3].p2 = vec3_set(0.5, -0.5, 0.5);
+	temp[3].p3 = vec3_set(0.5, -0.5, -0.5);
+
+	temp[4].p1 = vec3_set(0.5, 0.5, -0.5);
+	temp[4].p2 = vec3_set(0.5, -0.5, -0.5);
+	temp[4].p3 = vec3_set(0.5, -0.5, 0.5);
+
+	temp[5].p1 = vec3_set(0.5, 0.5, -0.5);
+	temp[5].p2 = vec3_set(0.5, -0.5, 0.5);
+	temp[5].p3 = vec3_set(0.5, 0.5, 0.5);
+	return (temp);
+}
+
 int	main(void)
 {
 	t_data	data;
-	t_vec3	points[8];
-	t_mtx3	orto;
-	int		i;
 
-	i = 0;
-	orto = orto_init();
-	data.points_size = 8;
-	points[0] = vec3_set(100, 100, 100);
-	points[1] = vec3_set(100, 100, 200);
-	points[2] = vec3_set(100, 200, 100);
-	points[3] = vec3_set(100, 200, 200);
-	points[4] = vec3_set(200, 100, 100);
-	points[5] = vec3_set(200, 100, 200);
-	points[6] = vec3_set(200, 200, 100);
-	points[7] = vec3_set(200, 200, 200);
-	while (i < data.points_size)
-	{
-		points[i] = mtx3_rot(0, 0, 90, points[i]);
-		points[i] = mtx_vec_mul3(orto, points[i]);
-		i++;
-	}
-	data.points = points;
+	data.orto_mtx = orto_init();
+	data.tri_count = 6;
+	data.tris = tris_init();
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 500, 500, "Test");
-	data.img.img = mlx_new_image(data.mlx, 500, 500);
+	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test");
+	data.img.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.data = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 			&data.img.size_line, &data.img.endian);
+	mlx_key_hook(data.win, exit_app, &data);
 	draw_image(&data);
 	mlx_loop(data.mlx);
 	system("leaks fdf");

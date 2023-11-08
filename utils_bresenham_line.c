@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 20:06:06 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/08 01:05:36 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/08 21:24:37 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
 	x = pt1.x;
 	while (x < pt2.x && x < WIDTH && x > 0 )
 	{
+		if (y <= HEIGHT && y >= 0 && x <= WIDTH && x >= 0)
+			put_pixel(img, x, y, color);
 		if (side_check > 0)
 		{
 			y += inc;
@@ -41,7 +43,6 @@ void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
 		else
 			side_check = side_check + (2 * delta.y);
 		x++;
-		put_pixel(img, x, y, color);
 	}
 }
 
@@ -64,8 +65,10 @@ void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
 	side_check = (2 * delta.x) - delta.y;
 	x = pt1.x;
 	y = pt1.y;
-	while (y <= pt2.y && y < HEIGHT && y > 0)
+	while (y <= pt2.y)
 	{
+		if (y <= HEIGHT && y >= 0 && x <= WIDTH && x >= 0)
+			put_pixel(img, x, y, color);
 		if (side_check > 0)
 		{
 			x += inc;
@@ -74,8 +77,6 @@ void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
 		else
 			side_check = side_check + (2 * delta.x);
 		y++;
-		printf("x: %f, y: %f\n", x, y);
-		put_pixel(img, x, y, color);
 	}
 }
 
