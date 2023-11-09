@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   vec4_vec4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 15:17:19 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/09 22:20:11 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 2023/11/10 00:52:20 by bgrhnzcn          #+#    #+#             */
+/*   Updated: 2023/11/10 01:12:55 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	input(int keycode, t_data *data)
+t_vec4	vec4_norm(t_vec4 vec)
 {
-	if (keycode == XK_Escape)
-	{
-		mlx_destroy_image(data->mlx, data->img.img);
-		mlx_destroy_window(data->mlx, data->win);
-		free(data->mlx);
-		exit(0);
-	}
-	return (0);
+	return (vec4_div(vec, vec4_mag(vec)));
 }

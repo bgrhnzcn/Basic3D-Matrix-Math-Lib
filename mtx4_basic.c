@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:52:16 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/08 20:58:12 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/09 21:39:20 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,21 @@ void	set_row4(t_mtx4 *mtx, int row_val, t_vec4 row)
 t_vec4	mtx_vec_mul4(t_mtx4 mtx, t_vec4 vec)
 {
 	t_vec4	vec_res;
-	t_vec4	col1;
-	t_vec4	col2;
-	t_vec4	col3;
-	t_vec4	col4;
 
-	col1 = mtx.col1;
-	col2 = mtx.col2;
-	col3 = mtx.col3;
-	col4 = mtx.col4;
-	vec_res.x = vec4_dot(vec, col1);
-	vec_res.y = vec4_dot(vec, col2);
-	vec_res.z = vec4_dot(vec, col3);
-	vec_res.w = vec4_dot(vec, col4);
+	vec_res.x = vec4_dot(vec, get_row4(mtx, 1));
+	vec_res.y = vec4_dot(vec, get_row4(mtx, 2));
+	vec_res.z = vec4_dot(vec, get_row4(mtx, 3));
+	vec_res.w = vec4_dot(vec, get_row4(mtx, 4));
 	return (vec_res);
+}
+
+t_mtx4	mtx_mtx_mul4(t_mtx4 mtx1, t_mtx4 mtx2)
+{
+	t_mtx4	mtx_res;
+
+	set_row4(&mtx_res, 1, mtx_vec_mul4(mtx2, get_row4(mtx1, 1)));
+	set_row4(&mtx_res, 2, mtx_vec_mul4(mtx2, get_row4(mtx1, 2)));
+	set_row4(&mtx_res, 3, mtx_vec_mul4(mtx2, get_row4(mtx1, 3)));
+	set_row4(&mtx_res, 4, mtx_vec_mul4(mtx2, get_row4(mtx1, 4)));
+	return (mtx_res);
 }

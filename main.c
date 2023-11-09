@@ -55,7 +55,7 @@ int	main(void)
 	data.img.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.data = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 			&data.img.size_line, &data.img.endian);
-	mlx_key_hook(data.win, exit_app, &data);
+	mlx_key_hook(data.win, input, &data);
 	draw_image(&data);
 	mlx_loop(data.mlx);
 	system("leaks fdf");
