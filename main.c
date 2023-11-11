@@ -43,12 +43,34 @@ t_tri	*tris_init(void)
 	return (temp);
 }
 
+t_mesh	mesh_init(char *obj_path)
+{
+	t_mesh	mesh;
+	char	buff;
+	int		obj_file;
+	int		read_state;
+
+	obj_file = open(obj_path, O_RDONLY);
+	mesh.tri_count = 0;
+	read_state = 1;
+	while (read_state > 0)
+	{
+		read_state = read(obj_file, &buff, 1);
+		if (buff == 'f')
+			mesh.tri_count++;
+		printf("Working...\n");
+	}
+	mesh.mesh = malloc(sizeof(t_tri) * mesh.tri_count);
+	return (mesh);
+}
+
 int	main(void)
 {
 	t_data	data;
 
 	data.orto_mtx = orto_init();
-	data.tri_count = 6;
+	//data.mesh = mesh_init("Serdar3.rt");
+	printf("tri_count: %d\n", data.mesh.tri_count);
 	data.tris = tris_init();
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test");

@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/08 20:55:54 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:27:21 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ typedef struct s_base3
 	const t_mtx3	mtx3_ident;
 }	t_base3;
 
+typedef struct s_mesh
+{
+	t_tri	*mesh;
+	int		tri_count;
+}	t_mesh;
+
+
 typedef	struct s_img
 {
 	void	*img;
@@ -114,4 +121,5 @@ typedef struct s_data
 	void			*win;
 	t_img			img;
 	t_tri			*tris;
+	t_mesh			mesh;
 }	t_data;

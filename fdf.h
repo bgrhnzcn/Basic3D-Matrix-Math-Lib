@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/10 01:13:23 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:27:16 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define PI		3.14159265358979323846
 
 # include "structs.h"
+# include <fcntl.h>
 # include <math.h>
 # include <X11/keysym.h>
 # include "mlx.h"

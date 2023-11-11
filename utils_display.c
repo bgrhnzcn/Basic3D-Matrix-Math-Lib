@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/10 00:46:45 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:10:21 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	draw_image(t_data *data)
 		t_mtx4	mtx;
 
 		pos = vec3_set(1, 2, 3);
-		rot	= vec3_set(30, 30, 30);
+		rot	= vec3_set(30, 0, 0);
 		sca = vec3_set(1, 1, 1);
 		mtx = loc_to_glob(pos, rot, sca);
 		tris[i].p1 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(tris[i].p1, 1))));
