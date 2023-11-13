@@ -43,6 +43,20 @@ t_tri	*tris_init(void)
 	return (temp);
 }
 
+//void	bases_init(t_data *data)
+//{
+//	data->bases.vec3_i = vec3_set(1, 0, 0);
+//	data->bases.vec3_j = vec3_set(0, 1, 0);
+//	data->bases.vec3_k = vec3_set(0, 0, 1);
+//	data->bases.vec3_null = vec3_set(0, 0, 0);
+//	data->bases.mtx3_null.col1 = data->bases.vec3_null;
+//	data->bases.mtx3_null.col2 = data->bases.vec3_null;
+//	data->bases.mtx3_null.col3 = data->bases.vec3_null;
+//	data->bases.mtx3_ident.col1 = data->bases.vec3_i;
+//	data->bases.mtx3_ident.col2 = data->bases.vec3_j;
+//	data->bases.mtx3_ident.col3 = data->bases.vec3_k;
+//}
+
 t_mesh	mesh_init(char *obj_path)
 {
 	t_mesh	mesh;
@@ -70,7 +84,8 @@ int	main(void)
 
 	data.orto_mtx = orto_init();
 	//data.mesh = mesh_init("Serdar3.rt");
-	printf("tri_count: %d\n", data.mesh.tri_count);
+	//printf("tri_count: %d\n", data.mesh.tri_count);
+	data.tri_count = 6;
 	data.tris = tris_init();
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test");

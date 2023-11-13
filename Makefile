@@ -1,4 +1,4 @@
-INCLUDES = -I/usr/include -Imlx -I./
+INCLUDES = -I/usr/include -Imlx -I.
 
 INCLUDES_MAC = -I .
 

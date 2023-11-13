@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/11 22:27:21 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/14 00:54:14 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,13 @@ typedef union u_mtx4
 	double	data[16];
 }	t_mtx4;
 
-typedef struct s_base3
-{
-	const t_vec3	vec3_i;
-	const t_vec3	vec3_j;
-	const t_vec3	vec3_k;
-	const t_vec3	vec3_null;
-	const t_mtx3	mtx3_null;
-	const t_mtx3	mtx3_ident;
-}	t_base3;
-
 typedef struct s_mesh
 {
 	t_tri	*mesh;
 	int		tri_count;
 }	t_mesh;
 
-
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*data;
@@ -111,11 +100,24 @@ typedef	struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_vec3_base
+{
+	const t_vec3	vec3_i;
+	const t_vec3	vec3_j;
+	const t_vec3	vec3_k;
+	const t_vec3	vec3_null;
+}	t_vec3_base;
+
+typedef struct s_mtx3_base
+{
+	const t_mtx3	mtx3_null;
+	const t_mtx3	mtx3_ident;
+}	t_mtx3_base;
+
 typedef struct s_data
 {
 	t_mtx4			pers_mtx;
 	t_mtx4			orto_mtx;
-	const t_base3	bases;
 	int				tri_count;
 	void			*mlx;
 	void			*win;

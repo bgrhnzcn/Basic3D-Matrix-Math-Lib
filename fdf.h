@@ -6,28 +6,41 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/11 18:27:16 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/14 01:21:46 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
 # define HEIGHT	900
 # define WIDTH 	900
 # define TOP	-5.
 # define BOT	5.
 # define RIGHT	5.
 # define LEFT	-5.
-# define NEAR 	1
+# define NEAR 	1.
 # define FAR 	1000.
 # define PI		3.14159265358979323846
 
+
+# include "libft.h"
 # include "structs.h"
+static const t_vec3_base	g_vec3_base = {
+	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
+	.vec3_j = {{.x = 0, .y = 1, .z= 0}},
+	.vec3_k = {{.x = 0, .y = 0, .z = 1}},
+	.vec3_null = {{0}},
+};
+
+static const t_mtx3_base	g_mtx3_base = {
+	.mtx3_ident = {{{{1, 0, 0}}, {{0, 1, 0}}, {{0, 0, 1}}}},
+	.mtx3_null = {{{{0}}}}
+};
 # include <fcntl.h>
 # include <math.h>
 # include <X11/keysym.h>
 # include "mlx.h"
-# include "libft.h"
 # include "ft_printf.h"
 # include <stdio.h>
 # include "utils.c"
@@ -48,6 +61,7 @@
 # include "projections.c"
 # include "transforms.c"
 # include "utils_display.c"
+
 
 double	deg_to_rad(double deg);
 double	rad_to_deg(double rad);
