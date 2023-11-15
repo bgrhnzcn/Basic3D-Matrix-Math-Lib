@@ -1,4 +1,4 @@
-INCLUDES = -I/usr/include -Imlx -I.
+INCLUDES = -I/usr/include -Imlx -I .
 
 INCLUDES_MAC = -I .
 
@@ -8,7 +8,7 @@ CC = gcc
 
 CFLAGS = -g -Wall -Werror -Wextra
 
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
+MLX_FLAGS = libftprintf.a get_next_line.a libft.a -Bdynamic -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 
 MLX_FLAGS_MAC = -L . -lmlx -lft -lftprintf -framework OpenGL -framework AppKit
 

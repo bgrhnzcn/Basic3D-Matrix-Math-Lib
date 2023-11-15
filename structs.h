@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/14 00:54:14 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/15 03:56:14 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_mesh
 {
 	t_tri	*mesh;
 	int		tri_count;
+	int		ver_count;
 }	t_mesh;
 
 typedef struct s_img
@@ -114,14 +115,31 @@ typedef struct s_mtx3_base
 	const t_mtx3	mtx3_ident;
 }	t_mtx3_base;
 
+typedef struct s_get_verteces
+{
+	t_vec3	*vertices;
+	char	*line;
+	char	**datas;
+	int		obj_file;
+	int		index;
+}	t_get_vert;
+
+typedef struct s_get_tris
+{
+	t_tri	*tris;
+	char	*line;
+	char	**datas;
+	int		obj_file;
+	int		index;
+}	t_get_tris;
+
 typedef struct s_data
 {
-	t_mtx4			pers_mtx;
-	t_mtx4			orto_mtx;
-	int				tri_count;
-	void			*mlx;
-	void			*win;
-	t_img			img;
-	t_tri			*tris;
-	t_mesh			mesh;
+	t_mtx4	pers_mtx;
+	t_mtx4	orto_mtx;
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	t_mesh	mesh;
+	double	time;
 }	t_data;

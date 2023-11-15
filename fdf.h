@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/14 01:21:46 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/15 04:16:25 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define PI		3.14159265358979323846
 
 
-# include "libft.h"
 # include "structs.h"
+# include "libft.h"
 static const t_vec3_base	g_vec3_base = {
 	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
 	.vec3_j = {{.x = 0, .y = 1, .z= 0}},
@@ -61,6 +61,7 @@ static const t_mtx3_base	g_mtx3_base = {
 # include "projections.c"
 # include "transforms.c"
 # include "utils_display.c"
+# include "get_next_line.h"
 
 
 double	deg_to_rad(double deg);
@@ -129,7 +130,7 @@ void	put_pixel(t_img *img, int x, int y, unsigned int color);
 void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
 void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
 void	draw_line(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
-void	draw_tri(t_data *data, int j, unsigned int color);
+void	draw_tri(t_data *data, t_tri *tris, int j, unsigned int color);
 int		draw_image(t_data *data);
 void	fill_img(t_data *data, unsigned int color);
 
