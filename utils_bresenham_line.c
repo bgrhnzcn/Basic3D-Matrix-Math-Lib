@@ -6,77 +6,75 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 20:06:06 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/08 21:24:37 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/16 01:32:15 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
+static void	drw_ln_hlpr_high(t_draw_line *d)
 {
-	t_vec2	delta;
-	double	inc;
-	double	side_check;
-	double	x;
-	double	y;
+	d->x += d->inc;
+	d->side_check = d->side_check + (2 * (d->delta.x - d->delta.y));
+}
 
-	delta.x = pt2.x - pt1.x;
-	delta.y = pt2.y - pt1.y;
-	inc = 1;
-	if (delta.y < 0)
+static void	drw_ln_hlpr_low(t_draw_line *d)
+{
+	d->y += d->inc;
+	d->side_check = d->side_check + (2 * (d->delta.y - d->delta.x));
+}
+
+static void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
+{
+	t_draw_line	d;
+
+	d.delta.x = pt2.x - pt1.x;
+	d.delta.y = pt2.y - pt1.y;
+	d.inc = 1;
+	if (d.delta.y < 0)
 	{
-		inc = -1;
-		delta.y = -delta.y;
+		d.inc = -1;
+		d.delta.y = -d.delta.y;
 	}
-	side_check = (2 * delta.y) - delta.x;
-	y = pt1.y;
-	x = pt1.x;
-	while (x < pt2.x && x < WIDTH && x > 0 )
+	d.side_check = (2 * d.delta.y) - d.delta.x;
+	d.y = pt1.y;
+	d.x = pt1.x;
+	while (d.x < pt2.x && d.x < WIDTH && d.x > 0)
 	{
-		if (y <= HEIGHT && y >= 0 && x <= WIDTH && x >= 0)
-			put_pixel(img, x, y, color);
-		if (side_check > 0)
-		{
-			y += inc;
-			side_check = side_check + (2 * (delta.y - delta.x));
-		}
+		if (d.y <= HEIGHT && d.y >= 0 && d.x <= WIDTH && d.x >= 0)
+			put_pixel(img, d.x, d.y, color);
+		if (d.side_check > 0)
+			drw_ln_hlpr_low(&d);
 		else
-			side_check = side_check + (2 * delta.y);
-		x++;
+			d.side_check = d.side_check + (2 * d.delta.y);
+		d.x++;
 	}
 }
 
-void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
+static void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color)
 {
-	t_vec2	delta;
-	double	inc;
-	double	side_check;
-	double	x;
-	double	y;
+	t_draw_line	d;
 
-	delta.x = pt2.x - pt1.x;
-	delta.y = pt2.y - pt1.y;
-	inc = 1;
-	if (delta.x < 0)
+	d.delta.x = pt2.x - pt1.x;
+	d.delta.y = pt2.y - pt1.y;
+	d.inc = 1;
+	if (d.delta.x < 0)
 	{
-		inc = -1;
-		delta.x = -delta.x;
+		d.inc = -1;
+		d.delta.x = -d.delta.x;
 	}
-	side_check = (2 * delta.x) - delta.y;
-	x = pt1.x;
-	y = pt1.y;
-	while (y <= pt2.y)
+	d.side_check = (2 * d.delta.x) - d.delta.y;
+	d.x = pt1.x;
+	d.y = pt1.y;
+	while (d.y <= pt2.y)
 	{
-		if (y <= HEIGHT && y >= 0 && x <= WIDTH && x >= 0)
-			put_pixel(img, x, y, color);
-		if (side_check > 0)
-		{
-			x += inc;
-			side_check = side_check + (2 * (delta.x - delta.y));
-		}
+		if (d.y <= HEIGHT && d.y >= 0 && d.x <= WIDTH && d.x >= 0)
+			put_pixel(img, d.x, d.y, color);
+		if (d.side_check > 0)
+			drw_ln_hlpr_high(&d);
 		else
-			side_check = side_check + (2 * delta.x);
-		y++;
+			d.side_check = d.side_check + (2 * d.delta.x);
+		d.y++;
 	}
 }
 

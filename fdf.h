@@ -6,15 +6,25 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/15 04:16:25 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/16 01:35:05 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define HEIGHT	900
-# define WIDTH 	900
+# include "structs.h"
+# include "libft.h"
+# include <fcntl.h>
+# include <math.h>
+# include <X11/keysym.h>
+# include "mlx.h"
+# include "ft_printf.h"
+# include <stdio.h>
+# include "get_next_line.h"
+
+# define HEIGHT	1000
+# define WIDTH 	1800
 # define TOP	-5.
 # define BOT	5.
 # define RIGHT	5.
@@ -23,12 +33,9 @@
 # define FAR 	1000.
 # define PI		3.14159265358979323846
 
-
-# include "structs.h"
-# include "libft.h"
 static const t_vec3_base	g_vec3_base = {
 	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
-	.vec3_j = {{.x = 0, .y = 1, .z= 0}},
+	.vec3_j = {{.x = 0, .y = 1, .z = 0}},
 	.vec3_k = {{.x = 0, .y = 0, .z = 1}},
 	.vec3_null = {{0}},
 };
@@ -37,32 +44,6 @@ static const t_mtx3_base	g_mtx3_base = {
 	.mtx3_ident = {{{{1, 0, 0}}, {{0, 1, 0}}, {{0, 0, 1}}}},
 	.mtx3_null = {{{{0}}}}
 };
-# include <fcntl.h>
-# include <math.h>
-# include <X11/keysym.h>
-# include "mlx.h"
-# include "ft_printf.h"
-# include <stdio.h>
-# include "utils.c"
-# include "input.c"
-# include "utils_bresenham_line.c"
-# include "utils_maps.c"
-# include "vec2_op.c"
-# include "vec2_double.c"
-# include "vec2_vec2.c"
-# include "vec3_op.c"
-# include "vec3_double.c"
-# include "vec3_vec3.c"
-# include "vec4_op.c"
-# include "vec4_double.c"
-# include "vec_conv.c"
-# include "mtx3_basic.c"
-# include "mtx4_basic.c"
-# include "projections.c"
-# include "transforms.c"
-# include "utils_display.c"
-# include "get_next_line.h"
-
 
 double	deg_to_rad(double deg);
 double	rad_to_deg(double rad);
@@ -127,8 +108,6 @@ t_vec4	vec3_to_vec4(t_vec3 vec3, double w);
 t_vec3	vec4_to_vec3(t_vec4 vec4);
 
 void	put_pixel(t_img *img, int x, int y, unsigned int color);
-void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
-void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
 void	draw_line(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
 void	draw_tri(t_data *data, t_tri *tris, int j, unsigned int color);
 int		draw_image(t_data *data);
@@ -136,6 +115,15 @@ void	fill_img(t_data *data, unsigned int color);
 
 int		input(int keycode, t_data *data);
 
+void	free_str_arr(char **str_arr);
+int		data_counter(int obj_file, char type);
+int		get_vertex_data(t_get_vert *ver);
+t_vec3	*get_vertices(char *obj_path, int *ver_count);
+int		get_triangle_data(t_get_tris *tris, t_vec3 *vertices);
+t_tri	*get_triangles(char *obj_path, t_vec3 *vertices, int *tri_count);
+t_mesh	mesh_init(char *obj_path);
+
 t_mtx4	orto_init(void);
+t_mtx4	pers_init(void);
 
 #endif

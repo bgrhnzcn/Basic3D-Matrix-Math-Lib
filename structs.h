@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/15 03:56:14 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/15 21:58:48 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,15 @@ typedef struct s_mtx3_base
 	const t_mtx3	mtx3_ident;
 }	t_mtx3_base;
 
+typedef struct s_draw_line
+{
+	t_vec2	delta;
+	double	inc;
+	double	side_check;
+	double	x;
+	double	y;
+}	t_draw_line;
+
 typedef struct s_get_verteces
 {
 	t_vec3	*vertices;
@@ -141,5 +150,5 @@ typedef struct s_data
 	void	*win;
 	t_img	img;
 	t_mesh	mesh;
-	double	time;
+	int		time;
 }	t_data;
