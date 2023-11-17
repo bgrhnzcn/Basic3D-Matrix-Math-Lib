@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:17:19 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/15 04:42:32 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/17 16:14:10 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	input(int keycode, t_data *data)
 {
-	if (keycode == XK_Escape)
+	if (keycode == 0x35)
 	{
 		mlx_destroy_image(data->mlx, data->img.img);
 		mlx_destroy_window(data->mlx, data->win);

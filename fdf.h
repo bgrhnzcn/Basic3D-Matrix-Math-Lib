@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/17 03:09:14 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/17 16:17:41 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <fcntl.h>
 # include <math.h>
-# include <X11/keysym.h>
+//# include <X11/keysym.h>
 # include <stdio.h>
 # include <string.h>
 # include <errno.h>
@@ -35,17 +35,17 @@
 # define FAR 	1000.
 # define PI		3.14159265358979323846
 
-static const t_vec3_base	g_vec3_base = {
-	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
-	.vec3_j = {{.x = 0, .y = 1, .z = 0}},
-	.vec3_k = {{.x = 0, .y = 0, .z = 1}},
-	.vec3_null = {{0}},
-};
-
-static const t_mtx3_base	g_mtx3_base = {
-	.mtx3_ident = {{{{1, 0, 0}}, {{0, 1, 0}}, {{0, 0, 1}}}},
-	.mtx3_null = {{{{0}}}}
-};
+//static const t_vec3_base	g_vec3_base = {
+//	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
+//	.vec3_j = {{.x = 0, .y = 1, .z = 0}},
+//	.vec3_k = {{.x = 0, .y = 0, .z = 1}},
+//	.vec3_null = {{0}},
+//};
+//
+//static const t_mtx3_base	g_mtx3_base = {
+//	.mtx3_ident = {{{{1, 0, 0}}, {{0, 1, 0}}, {{0, 0, 1}}}},
+//	.mtx3_null = {{{{0}}}}
+//};
 
 double		deg_to_rad(double deg);
 double		rad_to_deg(double rad);
