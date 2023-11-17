@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/15 18:43:36 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/17 03:09:15 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ void	fill_img(t_data *data, unsigned int color)
 
 int	draw_image(t_data *data)
 {
-	int				i;
-	unsigned int	color;
-	t_tri			*tris;
+	int		i;
+	t_color	color;
+	t_tri	*tris;
+	t_mtx4	mtx;
 
-	color = 0x00FFFFFF;
+	color.value = 0x0000FFFF;
+	printf("A: %d, R: %d, G: %d, B: %d\n", color.alpha, color.red, color.green, color.blue);
 	i = 0;
 	if (data->time % 32 == 0)
 	{
@@ -54,15 +56,7 @@ int	draw_image(t_data *data)
 		fill_img(data, 0x00000000);
 		while (i < data->mesh.tri_count)
 		{
-			t_vec3	pos;
-			t_vec3	rot;
-			t_vec3	sca;
-			t_mtx4	mtx;
-	
-			pos = vec3_set(0, 0, 0);
-			rot	= vec3_set(data->time / 32, 0, data->time / 32);
-			sca = vec3_set(1, 1, 1);
-			mtx = loc_to_glob(pos, rot, sca);
+			mtx = loc_to_glob(vec3_set(0, 0, 0), vec3_set(45, 35.264, -90), vec3_set(1, 1, 1));
 			tris[i].p1 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(data->mesh.mesh[i].p1, 1))));
 			tris[i].p2 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(data->mesh.mesh[i].p2, 1))));
 			tris[i].p3 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(data->mesh.mesh[i].p3, 1))));
@@ -75,7 +69,7 @@ int	draw_image(t_data *data)
 			tris[i].p2.y *= 0.5 * HEIGHT;
 			tris[i].p3.x *= 0.5 * WIDTH;
 			tris[i].p3.y *= 0.5 * HEIGHT;
-			draw_tri(data, tris, i, color);
+			draw_tri(data, tris, i, color.value);
 			i++;
 		}
 		free(tris);

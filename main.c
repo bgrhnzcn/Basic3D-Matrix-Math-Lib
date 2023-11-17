@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:40:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/16 01:37:45 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/17 03:09:21 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	obj_path = argv[1];
+	if (!ft_strnstr(obj_path, ".fdf", ft_strlen(obj_path)))
+	{
+		printf("Error: Invalid file format\n");
+		return (EXIT_FAILURE);
+	}
 	data.time = 0;
 	data.orto_mtx = orto_init();
+	//data.map = fdf_map_init(obj_path);
 	data.mesh = mesh_init(obj_path);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test");

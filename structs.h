@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/15 21:58:48 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/17 03:08:40 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ typedef struct s_map
 	double	min_o;
 	double	max_o;
 }	t_map;
+
+typedef union u_color
+{
+	struct
+	{
+		unsigned char	blue;
+		unsigned char	green;
+		unsigned char	red;
+		unsigned char	alpha;
+	};
+	unsigned int	value;
+}	t_color;
 
 typedef union u_vec2
 {
@@ -142,13 +154,31 @@ typedef struct s_get_tris
 	int		index;
 }	t_get_tris;
 
+typedef struct s_fdf_map
+{
+	t_vec3			*vertexes;
+	unsigned int	*vertex_colors;
+	int				map_x;
+	int				map_y;
+}	t_fdf_map;
+
+typedef struct s_fdf_data
+{
+	char		**data;
+	char		*line;
+	int			fdf_file;
+	int			i;
+	int			j;
+}	t_fdf_data;
+
 typedef struct s_data
 {
-	t_mtx4	pers_mtx;
-	t_mtx4	orto_mtx;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	t_mesh	mesh;
-	int		time;
+	t_mtx4		pers_mtx;
+	t_mtx4		orto_mtx;
+	void		*mlx;
+	void		*win;
+	t_img		img;
+	t_mesh		mesh;
+	int			time;
+	t_fdf_map	*map;
 }	t_data;
