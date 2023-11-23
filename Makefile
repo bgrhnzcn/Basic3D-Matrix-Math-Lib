@@ -4,7 +4,7 @@ INCLUDES_MAC = -I .
 
 NAME = fdf
 
-CC = gcc
+CC = clang
 
 CFLAGS = -g -Wall -Werror -Wextra
 

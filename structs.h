@@ -3,20 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/17 03:08:40 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:09:07 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct s_map
+#ifndef STRUCTS_H
+# define STRUCTS_H
+# if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+
+typedef union u_color
 {
-	double	min_i;
-	double	max_i;
-	double	min_o;
-	double	max_o;
-}	t_map;
+	struct
+	{
+		unsigned char	alpha;
+		unsigned char	red;
+		unsigned char	green;
+		unsigned char	blue;
+	};
+	unsigned int	value;
+}	t_color;
+# else
 
 typedef union u_color
 {
@@ -29,6 +38,15 @@ typedef union u_color
 	};
 	unsigned int	value;
 }	t_color;
+# endif
+
+typedef struct s_map
+{
+	double	min_i;
+	double	max_i;
+	double	min_o;
+	double	max_o;
+}	t_map;
 
 typedef union u_vec2
 {
@@ -182,3 +200,5 @@ typedef struct s_data
 	int			time;
 	t_fdf_map	*map;
 }	t_data;
+
+#endif

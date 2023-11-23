@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/17 03:09:05 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:21:58 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	get_int_value_of_hex(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (c - 48);
+	if (c >= 'A' && c <= 'F')
+		return (c - 55);
+	if (c >= 'a' && c <= 'f')
+		return (c - 87);
+	return (0);
+}
+
+int	ft_atoi_hex(const char *str)
+{
+	int	res;
+	int	len;
+	int	digit;
+
+	if (str == NULL)
+		return (0xFFFFFFFF);
+	len = ft_strlen(str) - 2;
+	digit = 0;
+	res = 0;
+	while (len > 0)
+	{
+		res += get_int_value_of_hex(str[len + 1]) * pow(16, digit);
+		digit++;
+		len--;
+	}
+	return (res);
+}
 
 int	fdf_get_size(t_fdf_data *d, t_fdf_map *map)
 {
@@ -107,7 +138,10 @@ int	fdf_map_get_color(t_fdf_data *d, t_fdf_map *map)
 		d->i = 0;
 		while (d->i < map->map_x)
 		{
-
+			map->vertex_colors[d->i + (map->map_x * d->j)] = ft_atoi_hex(
+					ft_strnstr(d->data[d->i], "0x",
+						ft_strlen(d->data[d->i])));
+			d->i++;
 		}
 		d->j++;
 		free_str_arr(d->data);
@@ -151,7 +185,7 @@ t_fdf_map	*fdf_map_init(char *fdf_path)
 	if (map_status == 0 && map->map_y == 0)
 		return (NULL);
 	if (fdf_map_init_pos_data(&data, map, fdf_path) == -1)
-		return(NULL);
+		return (NULL);
 	if (fdf_map_init_color(&data, map, fdf_path) == -1)
 		return (NULL);
 	return (map);
