@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:34:21 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/28 18:20:50 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 02:22:56 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,23 @@ t_color	set_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b)
 	color.green = g;
 	color.blue = b;
 	return (color);
+}
+
+t_color	get_gradient_val(t_color from, t_color to, __uint8_t value)
+{
+	t_color	color;
+
+	color.red = lerp(value, from.red, to.red);
+	color.green = lerp(value, from.green, to.green);
+	color.blue = lerp(value, from.blue, to.blue);
+	return (color);
+}
+
+t_gradient	set_gradient(t_color from, t_color to)
+{
+	t_gradient	grad;
+
+	grad.from = from;
+	grad.to = to;
+	return (grad);
 }

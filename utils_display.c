@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/17 22:26:32 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/29 02:30:51 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_tri(t_data *data, t_tri *tris, int j, unsigned int color)
+void	draw_tri(t_data *data, t_tri *tris, int j, t_color color)
 {
 	draw_line(&(data)->img, tris[j].pts[0],
 		tris[j].pts[1], color);
@@ -22,7 +22,7 @@ void	draw_tri(t_data *data, t_tri *tris, int j, unsigned int color)
 		tris[j].pts[0], color);
 }
 
-void	fill_img(t_data *data, unsigned int color)
+void	fill_img(t_data *data, t_color color)
 {
 	int	i;
 	int	j;
@@ -40,42 +40,65 @@ void	fill_img(t_data *data, unsigned int color)
 	}
 }
 
-int	draw_image(t_data *data)
+t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
 {
-	int		i;
-	t_color	color;
-	t_tri	*tris;
+	t_vec3	*trans_map;
 	t_mtx4	mtx;
 
-	color.value = 0x0000FFFF;
-	printf("A: %d, R: %d, G: %d, B: %d\n", color.alpha, color.red, color.green, color.blue);
-	i = 0;
-	if (data->time % 32 == 0)
+	trans_map = malloc(d->map->map_x * d->map->map_y * sizeof(t_vec3));
+	if (trans_map == NULL)
+		return (NULL);
+	while (i < d->map->map_y)
 	{
-		tris = malloc(sizeof(t_tri) * data->mesh.tri_count);
-		fill_img(data, 0x00000000);
-		while (i < data->mesh.tri_count)
+		j = 0;
+		while (j < d->map->map_x)
 		{
-			mtx = loc_to_glob(vec3_set(0, 0, 0), vec3_set(data->time / 32, data->time / 32, data->time / 32), vec3_set(1, 1, 1));
-			//mtx = loc_to_glob(vec3_set(0, 0, 0), vec3_set(45, 35.264, -90), vec3_set(1, 1, 1));
-			tris[i].p1 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(data->mesh.mesh[i].p1, 1))));
-			tris[i].p2 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(data->mesh.mesh[i].p2, 1))));
-			tris[i].p3 = vec4_to_vec3(mtx_vec_mul4(data->orto_mtx, mtx_vec_mul4(mtx, vec3_to_vec4(data->mesh.mesh[i].p3, 1))));
-			tris[i].p1 = vec3_add(tris[i].p1, vec3_set(1, 1, 0));
-			tris[i].p2 = vec3_add(tris[i].p2, vec3_set(1, 1, 0));
-			tris[i].p3 = vec3_add(tris[i].p3, vec3_set(1, 1, 0));
-			tris[i].p1.x *= 0.5 * WIDTH;
-			tris[i].p1.y *= 0.5 * HEIGHT;
-			tris[i].p2.x *= 0.5 * WIDTH;
-			tris[i].p2.y *= 0.5 * HEIGHT;
-			tris[i].p3.x *= 0.5 * WIDTH;
-			tris[i].p3.y *= 0.5 * HEIGHT;
-			draw_tri(data, tris, i, color.value);
-			i++;
+			curr = (i * d->map->map_x) + j;
+			mtx = loc_to_glob(VEC3_NULL, vec3_set(45, 35.264, -90), VEC3_ONE);
+			trans_map[curr] = glob_to_clip(d, mtx, curr);
+			trans_map[curr] = clip_to_screen(trans_map[curr]);
+			j++;
 		}
-		free(tris);
-		mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+		i++;
 	}
-	data->time += 1;
+	return (trans_map);
+}
+
+void	draw_map(t_data *d, t_vec3 *tr_map)
+{
+	int			i;
+	int			j;
+	int			k;
+	t_gradient	grad;
+	t_color		*ver_col;
+
+	ver_col = d->map->vertex_colors;
+	while (i < d->map->map_y - 1)
+	{
+		j = 0;
+		while (j < d->map->map_x - 1)
+		{
+			k = (i * d->map->map_x) + j;
+			grad = set_gradient(ver_col[k], ver_col[k + 1]);
+			gradient_line(&d->img, tr_map[k], tr_map[k + 1], grad);
+			grad = set_gradient(ver_col[k], ver_col[k + d->map->map_x]);
+			gradient_line(&d->img, tr_map[k], tr_map[k + d->map->map_x], grad);
+			j++;
+		}
+		i++;
+	}
+}
+
+int	draw_image(t_data *data)
+{
+	t_vec3		*trans_map;
+
+	fill_img(data, set_color(0, 0, 0, 0));
+	trans_map = get_screen_points(data, 0, 0, 0);
+	if (trans_map == NULL)
+		exit(1);
+	draw_map(data, trans_map);
+	free(trans_map);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	return (0);
 }

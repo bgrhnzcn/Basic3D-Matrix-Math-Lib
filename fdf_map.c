@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/23 22:21:58 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/29 02:13:11 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	fdf_map_get_color(t_fdf_data *d, t_fdf_map *map)
 		d->i = 0;
 		while (d->i < map->map_x)
 		{
-			map->vertex_colors[d->i + (map->map_x * d->j)] = ft_atoi_hex(
+			map->vertex_colors[d->i + (map->map_x * d->j)].value = ft_atoi_hex(
 					ft_strnstr(d->data[d->i], "0x",
 						ft_strlen(d->data[d->i])));
 			d->i++;

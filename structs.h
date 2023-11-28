@@ -6,12 +6,15 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/28 13:29:30 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 02:12:21 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef unsigned char t_uchar;
+
 # if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 
 typedef union u_color
@@ -39,6 +42,12 @@ typedef union u_color
 	unsigned int	value;
 }	t_color;
 # endif
+
+typedef struct s_gradient
+{
+	t_color	from;
+	t_color	to;
+}	t_gradient;
 
 typedef struct s_map
 {
@@ -174,10 +183,10 @@ typedef struct s_get_tris
 
 typedef struct s_fdf_map
 {
-	t_vec3			*vertexes;
-	unsigned int	*vertex_colors;
-	int				map_x;
-	int				map_y;
+	t_vec3	*vertexes;
+	t_color	*vertex_colors;
+	int		map_x;
+	int		map_y;
 }	t_fdf_map;
 
 typedef struct s_fdf_data

@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:50:51 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/08 00:38:04 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 02:37:33 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,13 @@ double	rad_to_deg(double rad)
 	return (rad * (180 / PI));
 }
 
-void	put_pixel(t_img *img, int x, int y, unsigned int color)
+void	put_pixel(t_img *img, int x, int y, t_color color)
 {
 	char	*point;
 
 	point = (img->data) + ((img->bits_per_pixel / 8) * x) + (img->size_line * y);
-	if (img->endian == 1)
-	{
-		point[0] = (color >> 24);
-		point[1] = (color >> 16) & 0xFF;
-		point[2] = (color >> 8) & 0xFF;
-		point[3] = (color) & 0xFF;
-	}
-	else if (img->endian == 0)
-	{
-		point[0] = (color) & 0xFF;
-        point[1] = (color >> 8) & 0xFF;
-        point[2] = (color >> 16) & 0xFF;
-        point[3] = (color >> 24);
-	}
+	point[0] = color.alpha;
+	point[1] = color.red;
+	point[2] = color.green;
+	point[3] = color.blue;
 }

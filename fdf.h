@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/28 13:55:47 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 02:31:31 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,17 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-# define HEIGHT	1000
-# define WIDTH 	1000
-# define TOP	-5.
-# define BOT	5.
-# define RIGHT	5.
-# define LEFT	-5.
-# define NEAR 	1.
-# define FAR 	1000.
-# define PI		3.14159265358979323846
-# define VEC3_NULL (t_vec3){{.x = 0, .y = 5, .z = 10}}
-
-//static const t_vec3_base	g_vec3_base = {
-//	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
-//	.vec3_j = {{.x = 0, .y = 1, .z = 0}},
-//	.vec3_k = {{.x = 0, .y = 0, .z = 1}},
-//	.vec3_null = {{0}},
-//};
-//
-//static const t_mtx3_base	g_mtx3_base = {
-//	.mtx3_ident = {{{{1, 0, 0}}, {{0, 1, 0}}, {{0, 0, 1}}}},
-//	.mtx3_null = {{{{0}}}}
-//};
+# define HEIGHT		1000
+# define WIDTH 		1000
+# define TOP		-5.
+# define BOT		5.
+# define RIGHT		5.
+# define LEFT		-5.
+# define NEAR 		1.
+# define FAR 		1000.
+# define PI			3.14159265358979323846
+# define VEC3_NULL	(t_vec3){{.x = 0., .y = 0., .z = 0.}}
+# define VEC3_ONE	(t_vec3){{.x = 1., .y = 1., .z = 1.}}
 
 double		deg_to_rad(double deg);
 double		rad_to_deg(double rad);
@@ -96,6 +85,9 @@ t_vec3		mtx3_trans(double x, double y, double z, t_vec3 vec);
 t_vec3		mtx3_scale(double x, double y, double z, t_vec3 vec);
 t_vec3		mtx3_rot(double x, double y, double z, t_vec3 vec);
 t_mtx4		loc_to_glob(t_vec3 t, t_vec3 r, t_vec3 s);
+t_vec3		glob_to_clip(t_data *d, t_mtx4 mtx, int current);
+t_vec3		clip_to_screen(t_vec3 point);
+t_vec3		*get_screen_points(t_data *d, int i, int j, int curr);
 
 void		set_row3(t_mtx3 *mtx, int row_val, t_vec3 row);
 t_vec3		get_row3(t_mtx3 mtx, int row_val);
@@ -110,11 +102,17 @@ t_mtx4		mtx_mtx_mul4(t_mtx4 mtx1, t_mtx4 mtx2);
 t_vec4		vec3_to_vec4(t_vec3 vec3, double w);
 t_vec3		vec4_to_vec3(t_vec4 vec4);
 
-void		put_pixel(t_img *img, int x, int y, unsigned int color);
-void		draw_line(t_img *img, t_vec3 pt1, t_vec3 pt2, unsigned int color);
-void		draw_tri(t_data *data, t_tri *tris, int j, unsigned int color);
+t_color		set_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
+t_color		get_gradient_val(t_color from, t_color to, __uint8_t value);
+t_gradient	set_gradient(t_color from, t_color to);
+
+void		put_pixel(t_img *img, int x, int y, t_color color);
+void		draw_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_color color);
+void		gradient_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient grad);
+void		draw_tri(t_data *data, t_tri *tris, int j, t_color color);
+void		draw_map(t_data *d, t_vec3 *tr_map);
 int			draw_image(t_data *data);
-void		fill_img(t_data *data, unsigned int color);
+void		fill_img(t_data *data, t_color color);
 
 int			input(int keycode, t_data *data);
 
