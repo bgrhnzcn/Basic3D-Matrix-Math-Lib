@@ -4,11 +4,11 @@ INCLUDES_MAC = -I .
 
 NAME = fdf
 
-CC = clang
+CC = gcc
 
 CFLAGS = -g -Wall -Werror -Wextra
 
-MLX_FLAGS = libftprintf.a get_next_line.a libft.a \
+MLX_FLAGS = linux_lib/libftprintf.a linux_lib/get_next_line.a linux_lib/libft.a \
 			-Bdynamic -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 
 MLX_FLAGS_MAC = mac_lib/libft.a mac_lib/get_next_line.a mac_lib/libftprintf.a mac_lib/libmlx.a -Bdynamic -framework OpenGL -framework AppKit
@@ -21,10 +21,10 @@ SRCS = main.c input.c mtx3_basic.c mtx4_basic.c projections.c transforms.c \
 OBJ = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $(INCLUDES_MAC) $?
+	$(CC) $(CFLAGS) -c $(INCLUDES) $?
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_FLAGS_MAC)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_FLAGS)
 
 all: $(NAME)
 

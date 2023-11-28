@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/17 16:17:41 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:55:47 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define NEAR 	1.
 # define FAR 	1000.
 # define PI		3.14159265358979323846
+# define VEC3_NULL (t_vec3){{.x = 0, .y = 5, .z = 10}}
 
 //static const t_vec3_base	g_vec3_base = {
 //	.vec3_i = {{.x = 1, .y = 0, .z = 0}},
