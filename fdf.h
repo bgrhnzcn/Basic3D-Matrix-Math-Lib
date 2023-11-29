@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/29 02:31:31 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:56:37 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@
 
 # define HEIGHT		1000
 # define WIDTH 		1000
-# define TOP		-5.
-# define BOT		5.
-# define RIGHT		5.
-# define LEFT		-5.
+# define TOP		-10.
+# define BOT		10.
+# define RIGHT		-10.
+# define LEFT		10.
 # define NEAR 		1.
 # define FAR 		1000.
 # define PI			3.14159265358979323846
 # define VEC3_NULL	(t_vec3){{.x = 0., .y = 0., .z = 0.}}
 # define VEC3_ONE	(t_vec3){{.x = 1., .y = 1., .z = 1.}}
+
+size_t		ft_strarrlen(char **arr);
 
 double		deg_to_rad(double deg);
 double		rad_to_deg(double rad);

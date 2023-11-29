@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 02:30:51 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:05:36 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
 		while (j < d->map->map_x)
 		{
 			curr = (i * d->map->map_x) + j;
-			mtx = loc_to_glob(VEC3_NULL, vec3_set(45, 35.264, -90), VEC3_ONE);
+			mtx = loc_to_glob(vec3_set(0, 0, 0), vec3_set(45, 35.16 + d->time, d->time), vec3_set(3, -3, -10));
 			trans_map[curr] = glob_to_clip(d, mtx, curr);
 			trans_map[curr] = clip_to_screen(trans_map[curr]);
 			j++;
@@ -64,29 +64,55 @@ t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
 	return (trans_map);
 }
 
-void	draw_map(t_data *d, t_vec3 *tr_map)
+void	draw_map_ver(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 {
 	int			i;
 	int			j;
 	int			k;
-	t_gradient	grad;
-	t_color		*ver_col;
 
-	ver_col = d->map->vertex_colors;
-	while (i < d->map->map_y - 1)
+	j = 0;
+	while (j < d->map->map_x)
 	{
-		j = 0;
-		while (j < d->map->map_x - 1)
+		i = 0;
+		while (i < d->map->map_y -1)
 		{
 			k = (i * d->map->map_x) + j;
-			grad = set_gradient(ver_col[k], ver_col[k + 1]);
-			gradient_line(&d->img, tr_map[k], tr_map[k + 1], grad);
-			grad = set_gradient(ver_col[k], ver_col[k + d->map->map_x]);
-			gradient_line(&d->img, tr_map[k], tr_map[k + d->map->map_x], grad);
+			gradient_line(&d->img, tr_map[k], tr_map[k + d->map->map_x],
+					set_gradient(ver_col[k], ver_col[k + d->map->map_x]));
+			i++;
+		}
+		j++;
+	}
+}
+
+void	draw_map_hor(t_data *d, t_vec3 *tr_map, t_color *ver_col)
+{
+	int			i;
+	int			j;
+	int			k;
+
+	i = 0;
+	while (i < d->map->map_y)
+	{
+		j = 0;
+		while (j < d->map->map_x -1)
+		{
+			k = (i * d->map->map_x) + j;
+			gradient_line(&d->img, tr_map[k], tr_map[k + 1],
+					set_gradient(ver_col[k], ver_col[k + 1]));
 			j++;
 		}
 		i++;
 	}
+}
+
+void	draw_map(t_data *d, t_vec3 *tr_map)
+{
+	t_color		*ver_col;
+
+	ver_col = d->map->vertex_colors;
+	draw_map_ver(d, tr_map, ver_col);
+	draw_map_hor(d, tr_map, ver_col);
 }
 
 int	draw_image(t_data *data)
@@ -100,5 +126,6 @@ int	draw_image(t_data *data)
 	draw_map(data, trans_map);
 	free(trans_map);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	data->time++;
 	return (0);
 }

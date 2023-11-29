@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 02:13:11 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:03:17 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_atoi_hex(const char *str)
 	int	digit;
 
 	if (str == NULL)
-		return (0xFFFFFFFF);
+		return (0xFFFFFF00);
 	len = ft_strlen(str) - 2;
 	digit = 0;
 	res = 0;
@@ -59,8 +59,8 @@ int	fdf_get_size(t_fdf_data *d, t_fdf_map *map)
 			return (-1);
 		}
 		if (map->map_x == 0)
-			map->map_x = ft_strlen((char *)(d->data));
-		if (map->map_x != (int)ft_strlen((char *)(d->data)))
+			map->map_x = ft_strarrlen(d->data);
+		if (map->map_x != (int)ft_strarrlen(d->data))
 		{
 			free_str_arr(d->data);
 			free(d->line);

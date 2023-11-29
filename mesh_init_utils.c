@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mesh_init_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:48:26 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/17 16:49:11 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:19:00 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	free_str_arr(char **str_arr)
-{
-	int	i;
-
-	i = 0;
-	while (str_arr[i])
-	{
-		free(str_arr[i]);
-		i++;
-	}
-	free(str_arr);
-}
 
 int	data_counter(int obj_file, char type)
 {
