@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 18:03:17 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:33:51 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ int	fdf_map_init_pos_data(t_fdf_data *d, t_fdf_map *map, char *path)
 {
 	int	res;
 
-	map->vertexes = malloc(sizeof(t_vec3) * map->map_x * map->map_y);
-	if (map->vertexes == NULL)
+	map->verteces = malloc(sizeof(t_vec3) * ((map->map_x * map->map_y) + 1));
+	if (map->verteces == NULL)
 		return (-1);
 	d->fdf_file = open(path, O_RDONLY);
 	res = fdf_map_get_pos_data(d, map);
 	close(d->fdf_file);
 	if (res == -1)
 	{
-		free(map->vertexes);
+		free(map->verteces);
 		return (-1);
 	}
 	return (0);
@@ -108,9 +108,9 @@ int	fdf_map_get_pos_data(t_fdf_data *d, t_fdf_map *map)
 		d->i = 0;
 		while (d->i < map->map_x)
 		{
-			map->vertexes[d->i + (map->map_x * d->j)].x = d->i;
-			map->vertexes[d->i + (map->map_x * d->j)].y = d->j;
-			map->vertexes[d->i + (map->map_x * d->j)].z
+			map->verteces[d->i + (map->map_x * d->j)].x = d->i;
+			map->verteces[d->i + (map->map_x * d->j)].y = d->j;
+			map->verteces[d->i + (map->map_x * d->j)].z
 				= ft_atoi(d->data[d->i]);
 			d->i++;
 		}

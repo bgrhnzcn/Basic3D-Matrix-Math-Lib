@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 19:05:36 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:59:47 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	fill_img(t_data *data, t_color color)
 t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
 {
 	t_vec3	*trans_map;
-	t_mtx4	mtx;
 
 	trans_map = malloc(d->map->map_x * d->map->map_y * sizeof(t_vec3));
 	if (trans_map == NULL)
@@ -54,9 +53,8 @@ t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
 		while (j < d->map->map_x)
 		{
 			curr = (i * d->map->map_x) + j;
-			mtx = loc_to_glob(vec3_set(0, 0, 0), vec3_set(45, 35.16 + d->time, d->time), vec3_set(3, -3, -10));
-			trans_map[curr] = glob_to_clip(d, mtx, curr);
-			trans_map[curr] = clip_to_screen(trans_map[curr]);
+			trans_map[curr] = transform_pipeline(d->orto_mtx,
+						d->mtx_glob, d->mtx_loc, d->map->verteces[curr]);
 			j++;
 		}
 		i++;

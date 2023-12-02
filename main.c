@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:40:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 02:47:42 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/02 22:05:51 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ int	main(int argc, char **argv)
 		printf("Error: Invalid file format\n");
 		return (EXIT_FAILURE);
 	}
-	ft_printf("x: %d, y: %d, z: %d\n", (int)VEC3_NULL.x, (int)VEC3_NULL.y, (int)VEC3_NULL.z);
 	data.time = 0;
 	data.orto_mtx = orto_init();
 	data.map = fdf_map_init(obj_path);
+	data.mtx_loc = transform_mtx(vec3_set(0, 0, 0), vec3_set(45, 35.16, 180), vec3_set(3, -3, 10));
+	data.mtx_glob = transform_mtx(vec3_set(0, 0, 0), vec3_set(0, 0, 0), vec3_set(1, 1, 1));
 	//data.mesh = mesh_init(obj_path);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test");
@@ -36,7 +37,7 @@ int	main(int argc, char **argv)
 	data.img.data = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 			&data.img.size_line, &data.img.endian);
 	mlx_key_hook(data.win, input, &data);
-	mlx_loop_hook(data.mlx, draw_image, &data);
+	mlx_loop_hook(data.mlx, update, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

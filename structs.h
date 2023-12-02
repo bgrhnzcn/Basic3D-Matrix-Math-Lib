@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 02:12:21 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/02 22:11:26 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-typedef unsigned char t_uchar;
 
 # if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 
@@ -183,7 +181,7 @@ typedef struct s_get_tris
 
 typedef struct s_fdf_map
 {
-	t_vec3	*vertexes;
+	t_vec3	*verteces;
 	t_color	*vertex_colors;
 	int		map_x;
 	int		map_y;
@@ -202,6 +200,8 @@ typedef struct s_data
 {
 	t_mtx4		pers_mtx;
 	t_mtx4		orto_mtx;
+	t_mtx4		mtx_glob;
+	t_mtx4		mtx_loc;
 	void		*mlx;
 	void		*win;
 	t_img		img;
