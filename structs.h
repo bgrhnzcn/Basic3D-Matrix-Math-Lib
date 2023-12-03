@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/02 22:11:26 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/12/04 02:25:51 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+# if __BYTE_ORDER__ != __ORDER_BIG_ENDIAN__
 
 typedef union u_color
 {

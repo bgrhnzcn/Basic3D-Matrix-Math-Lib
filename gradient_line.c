@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 01:40:03 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/29 02:05:27 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/04 02:27:07 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ void	gradient_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient grad)
 	if (fabs(pt2.y - pt1.y) < fabs(pt2.x - pt1.x))
 	{
 		if (pt1.x > pt2.x)
-			draw_line_low(img, pt2, pt1, grad);
+			draw_line_low(img, pt2, pt1, inv_gradient(grad));
 		else
 			draw_line_low(img, pt1, pt2, grad);
 	}
 	else
 	{
 		if (pt1.y > pt2.y)
-			draw_line_high(img, pt2, pt1, grad);
+			draw_line_high(img, pt2, pt1, inv_gradient(grad));
 		else
 			draw_line_high(img, pt1, pt2, grad);
 	}

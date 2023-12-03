@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/02 20:33:51 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/12/04 02:26:44 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ int	get_int_value_of_hex(char c)
 	return (0);
 }
 
+
 int	ft_atoi_hex(const char *str)
 {
 	int	res;
 	int	len;
 	int	digit;
-
+	
 	if (str == NULL)
-		return (0xFFFFFF00);
+		return (0x00FFFFFF);
 	len = ft_strlen(str) - 2;
 	digit = 0;
 	res = 0;
@@ -40,6 +41,7 @@ int	ft_atoi_hex(const char *str)
 		digit++;
 		len--;
 	}
+	printf("%d\n", res);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/03 17:45:37 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/04 02:07:13 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,9 @@ t_vec4		vec3_to_vec4(t_vec3 vec3, double w);
 t_vec3		vec4_to_vec3(t_vec4 vec4);
 
 t_color		set_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
-t_color		get_gradient_val(t_color from, t_color to, __uint8_t value);
+t_color		get_gradient_val(t_color from, t_color to, double value);
 t_gradient	set_gradient(t_color from, t_color to);
+t_gradient	inv_gradient(t_gradient in);
 
 void		put_pixel(t_img *img, int x, int y, t_color color);
 void		draw_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_color color);
