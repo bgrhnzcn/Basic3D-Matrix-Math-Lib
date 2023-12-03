@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/02 22:05:25 by buozcan          ###   ########.fr       */
+/*   Updated: 2023/12/03 17:45:37 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@
 # include "get_next_line.h"
 
 //Special include to work on multi platform.
-# ifdef __LINUX__
+# ifdef __linux__
 #  include <X11/keysym.h>
+#  define ESC_KEY 65307
+# else
+#  define ESC_KEY 53
 # endif
 
 //Camera Options

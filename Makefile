@@ -1,4 +1,4 @@
-INCLUDES = -I/usr/include -Imlx -I .
+INCLUDES_LINUX = -I/usr/include -Imlx -I .
 
 INCLUDES_MAC = -I .
 
@@ -8,8 +8,8 @@ CC = gcc
 
 CFLAGS = -g -Wall -Werror -Wextra
 
-MLX_FLAGS = linux_lib/libftprintf.a linux_lib/get_next_line.a linux_lib/libft.a \
-			-Bdynamic -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
+MLX_FLAGS_LINUX = linux_lib/libftprintf.a linux_lib/get_next_line.a linux_lib/libft.a libmlx.a\
+			-Bdynamic -L/usr/lib/X11 -lXext -lX11 -lm
 
 MLX_FLAGS_MAC = mac_lib/libft.a mac_lib/get_next_line.a mac_lib/libftprintf.a mac_lib/libmlx.a -Bdynamic -framework OpenGL -framework AppKit
 
@@ -19,21 +19,21 @@ SRCS = main.c input.c mtx3_basic.c mtx4_basic.c projections.c transforms.c \
 	vec4_double.c vec4_op.c vec4_vec4.c mesh_init.c mesh_init_utils.c fdf_map.c \
 	colors.c transforms2.c gradient_line.c arrays.c pipeline.c update.c
 
+ifeq ($(shell uname),Linux)
+	MLX_FLAGS = $(MLX_FLAGS_LINUX)
+	INCLUDES = $(INCLUDES_LINUX)
+else
+	MLX_FLAGS = $(MLX_FLAGS_MAC)
+	INCLUDES = $(INCLUDES_MAC)
+endif
+
 OBJ = $(SRCS:.c=.o)
 
 %.o: %.c
-ifeq ($(shell uname), "Linux")
 	$(CC) $(CFLAGS) -c $(INCLUDES) $?
-else
-	$(CC) $(CFLAGS) -c $(INCLUDES_MAC) $?
-endif
 
 $(NAME): $(OBJ)
-ifeq ($(shell uname), "Linux")
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_FLAGS)
-else
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_FLAGS_MAC)
-endif
 
 all: $(NAME)
 
