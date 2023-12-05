@@ -6,38 +6,38 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/04 02:25:51 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:07:12 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# if __BYTE_ORDER__ != __ORDER_BIG_ENDIAN__
+# if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 
 typedef union u_color
 {
+	unsigned int	value;
 	struct
 	{
-		unsigned char	alpha;
-		unsigned char	red;
-		unsigned char	green;
-		unsigned char	blue;
+		__uint8_t	alpha;
+		__uint8_t	red;
+		__uint8_t	green;
+		__uint8_t	blue;
 	};
-	unsigned int	value;
 }	t_color;
 # else
 
 typedef union u_color
 {
+	unsigned int	value;
 	struct
 	{
-		unsigned char	blue;
-		unsigned char	green;
-		unsigned char	red;
-		unsigned char	alpha;
+		__uint8_t	blue;
+		__uint8_t	green;
+		__uint8_t	red;
+		__uint8_t	alpha;
 	};
-	unsigned int	value;
 }	t_color;
 # endif
 

@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/04 02:07:13 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:21:35 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 
 //# define VEC3_NULL	(t_vec3){{.x = 0., .y = 0., .z = 0.}}
 //# define VEC3_ONE	(t_vec3){{.x = 1., .y = 1., .z = 1.}}
+void	vec3_test(t_vec3 *vec, double x, double y, double z);
 
 //Gets numbers of strings inside of string arrays. String arrays must be null-ended.
 size_t		ft_strarrlen(char **arr);

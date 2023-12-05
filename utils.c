@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:50:51 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/04 19:24:44 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:07:11 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,5 @@ void	put_pixel(t_img *img, int x, int y, t_color color)
 	char	*point;
 
 	point = (img->data) + ((img->bits_per_pixel / 8) * x) + (img->size_line * y);
-	point[0] = color.alpha;
-	point[1] = color.red;
-	point[2] = color.green;
-	point[3] = color.blue;
+	*(unsigned int *)point = color.value;
 }

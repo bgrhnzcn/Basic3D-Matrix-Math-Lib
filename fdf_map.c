@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/04 02:26:44 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:34:45 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_atoi_hex(const char *str)
 	int	digit;
 	
 	if (str == NULL)
-		return (0x00FFFFFF);
+		return (0xFFFFFF);
 	len = ft_strlen(str) - 2;
 	digit = 0;
 	res = 0;
