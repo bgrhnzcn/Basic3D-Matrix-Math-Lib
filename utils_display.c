@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/05 19:01:47 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/06 06:15:51 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fill_img(t_data *data, t_color color)
 	}
 }
 
-t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
+t_vec3	*render_pipeline(t_data *d, int i, int j, int curr)
 {
 	t_vec3	*trans_map;
 
@@ -54,7 +54,7 @@ t_vec3	*get_screen_points(t_data *d, int i, int j, int curr)
 		{
 			curr = (i * d->map->map_x) + j;
 			trans_map[curr] = transform_pipeline(d->orto_mtx,
-						d->mtx_glob, d->mtx_loc, d->map->verteces[curr]);
+					d->mtx_glob, d->mtx_loc, d->map->verteces[curr]);
 			j++;
 		}
 		i++;
@@ -76,7 +76,7 @@ void	draw_map_ver(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 		{
 			k = (i * d->map->map_x) + j;
 			gradient_line(&d->img, tr_map[k], tr_map[k + d->map->map_x],
-					set_gradient(ver_col[k], ver_col[k + d->map->map_x]));
+				set_gradient(ver_col[k], ver_col[k + d->map->map_x]));
 			i++;
 		}
 		j++;
@@ -97,7 +97,7 @@ void	draw_map_hor(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 		{
 			k = (i * d->map->map_x) + j;
 			gradient_line(&d->img, tr_map[k], tr_map[k + 1],
-					set_gradient(ver_col[k], ver_col[k + 1]));
+				set_gradient(ver_col[k], ver_col[k + 1]));
 			j++;
 		}
 		i++;
@@ -118,7 +118,7 @@ int	draw_image(t_data *data)
 	t_vec3		*trans_map;
 
 	fill_img(data, set_color(0, 0, 0, 0));
-	trans_map = get_screen_points(data, 0, 0, 0);
+	trans_map = render_pipeline(data, 0, 0, 0);
 	if (trans_map == NULL)
 		exit(1);
 	draw_map(data, trans_map);

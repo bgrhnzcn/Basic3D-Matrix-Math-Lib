@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 01:40:03 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/04 20:30:57 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/06 01:40:53 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient gra)
 	d.side_check = (2 * d.delta.y) - d.delta.x;
 	d.y = pt1.y;
 	d.x = pt1.x;
-	while (d.x < pt2.x && d.x < WIDTH && d.x > 0)
+	while (d.x < pt2.x)
 	{
 		if (d.y <= HEIGHT && d.y >= 0 && d.x <= WIDTH && d.x >= 0)
 			put_pixel(img, d.x, d.y, get_gradient_val(gra.from, gra.to,
@@ -82,6 +82,10 @@ static void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient gra)
 
 void	gradient_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient grad)
 {
+	if ((pt2.x > WIDTH && pt1.x > WIDTH) || (pt2.x < 0 && pt1.x < 0))
+		return ;
+	if ((pt2.y > HEIGHT && pt1.y > HEIGHT) || (pt2.y < 0 && pt1.y < 0))
+		return ;
 	if (fabs(pt2.y - pt1.y) < fabs(pt2.x - pt1.x))
 	{
 		if (pt1.x > pt2.x)

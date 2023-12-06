@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:44:26 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/11/08 20:28:13 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/06 05:24:39 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ t_vec4	vec3_to_vec4(t_vec3 vec3, double w)
 
 t_vec3	vec4_to_vec3(t_vec4 vec4)
 {
-	return(vec3_set(vec4.x, vec4.y, vec4.z));
+	return (vec3_set(vec4.x, vec4.y, vec4.z));
 }

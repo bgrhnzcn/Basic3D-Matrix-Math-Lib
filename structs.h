@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/05 20:07:12 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/06 04:24:09 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,6 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	t_img		img;
-	t_mesh		mesh;
 	int			time;
 	t_fdf_map	*map;
 }	t_data;

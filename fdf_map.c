@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/05 17:34:45 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/06 05:18:32 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	fdf_map_init_pos_data(t_fdf_data *d, t_fdf_map *map, char *path)
 {
 	int	res;
 
+	ft_printf("Getting Position Data...\n");
 	map->verteces = malloc(sizeof(t_vec3) * ((map->map_x * map->map_y) + 1));
 	if (map->verteces == NULL)
 		return (-1);
@@ -156,6 +157,7 @@ int	fdf_map_init_color(t_fdf_data *d, t_fdf_map *map, char *path)
 {
 	int	res;
 
+	ft_printf("Getting Color Data...\n");
 	map->vertex_colors = malloc(sizeof(int) * map->map_x * map->map_y);
 	if (map->vertex_colors == NULL)
 		return (-1);
@@ -176,19 +178,20 @@ t_fdf_map	*fdf_map_init(char *fdf_path)
 	t_fdf_map	*map;
 	int			map_status;
 
+	ft_printf("Loading Map...\n");
 	map = malloc(sizeof(t_fdf_map));
 	if (map == NULL)
-		return (NULL);
+		return (error_msg(LOAD_ERROR), NULL);
 	data.fdf_file = open(fdf_path, O_RDONLY);
 	map_status = fdf_get_size(&data, map);
 	close(data.fdf_file);
 	if (map_status == -1)
-		return (NULL);
+		return (error_msg(LOAD_ERROR), NULL);
 	if (map_status == 0 && map->map_y == 0)
-		return (NULL);
+		return (error_msg(LOAD_ERROR), NULL);
 	if (fdf_map_init_pos_data(&data, map, fdf_path) == -1)
-		return (NULL);
+		return (error_msg(LOAD_ERROR), NULL);
 	if (fdf_map_init_color(&data, map, fdf_path) == -1)
-		return (NULL);
+		return (error_msg(LOAD_ERROR), NULL);
 	return (map);
 }
