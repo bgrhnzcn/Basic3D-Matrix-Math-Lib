@@ -6,18 +6,11 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:22:36 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/05 17:21:21 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:08:32 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	vec3_test(t_vec3 *vec, double x, double y, double z)
-{
-	vec->x = x;
-	vec->y = y;
-	vec->z = z;
-}
 
 t_vec3	vec3_set(double x, double y, double z)
 {

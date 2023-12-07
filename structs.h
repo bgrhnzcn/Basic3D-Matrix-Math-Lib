@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/06 04:24:09 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:11:54 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,7 @@ typedef struct s_fdf_data
 
 typedef struct s_data
 {
-	t_mtx4		pers_mtx;
-	t_mtx4		orto_mtx;
+	t_mtx4		proj_mtx;
 	t_mtx4		mtx_glob;
 	t_mtx4		mtx_loc;
 	void		*mlx;
@@ -207,6 +206,9 @@ typedef struct s_data
 	t_img		img;
 	int			time;
 	t_fdf_map	*map;
+	t_vec3		translation;
+	t_vec3		rotation;
+	t_vec3		scale;
 }	t_data;
 
 #endif
