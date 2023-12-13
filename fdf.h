@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/07 17:18:49 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:41:10 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 #  define A_KEY 0
 #  define S_KEY 1
 #  define D_KEY 2
+#  define F_KEY 3
+#  define G_KEY 5
 #  define X_KEY 7
 #  define Z_KEY 6
 #  define E_KEY 14
@@ -54,7 +56,7 @@
 #  define R_KEY 15
 #  define T_KEY 17
 #  define O_KEY 31
-#  define P_KEY XK_p
+#  define P_KEY 35
 # endif
 
 //Window Aspects
