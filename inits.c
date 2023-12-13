@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:53:25 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/07 18:50:16 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:43:49 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	main_init(t_data *data, char *obj_path)
 	mlx_do_key_autorepeaton(data->mlx);
 	data->map = fdf_map_init(obj_path);
 	null_checker(data, data->map, LOAD_ERROR);
-	ft_printf("Map Loaded Succesfully...");
+	ft_printf("Map Loaded Succesfully...\n");
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Test");
 	null_checker(data, data->win, MLX_ERROR);
 	data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
