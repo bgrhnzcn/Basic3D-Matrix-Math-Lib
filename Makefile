@@ -1,6 +1,6 @@
-INCLUDES_LINUX = -I/usr/include -Imlx -I .
+INCLUDES_LINUX = -I/usr/include -Imlx -ILibft -Iget_next_line -Ift_printf
 
-INCLUDES_MAC = -I .
+INCLUDES_MAC = -ILibft -Iget_next_line -Ift_printf
 
 NAME = fdf
 

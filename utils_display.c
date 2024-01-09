@@ -6,31 +6,13 @@
 /*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/09 19:49:59 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:47:54 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fill_img(t_data *dt, t_color color)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < dt->win.width)
-	{
-		j = 0;
-		while (j < dt->win.height)
-		{
-			put_pixel(&dt->img, i, j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-t_vec3	*renderer(t_data *d, int i, int j, int curr)
+t_vec3	*renderer(t_fdf *d, int i, int j, int curr)
 {
 	t_vec3	*trans_map;
 
@@ -43,8 +25,8 @@ t_vec3	*renderer(t_data *d, int i, int j, int curr)
 		while (j < d->map->map_x)
 		{
 			curr = (i * d->map->map_x) + j;
-			trans_map[curr] = graphic_pipeline(d->proj_mtx,
-					d->mtx_glob, d->mtx_loc, d->map->verteces[curr]);
+			trans_map[curr] = graphic_pipeline(d->data.proj_mtx,
+					d->data.mtx_glob, d->data.mtx_loc, d->map->verteces[curr]);
 			j++;
 		}
 		i++;
@@ -52,17 +34,17 @@ t_vec3	*renderer(t_data *d, int i, int j, int curr)
 	return (trans_map);
 }
 
-int	draw_image(t_data *data)
+int	draw_image(t_fdf *fdf)
 {
 	t_vec3		*trans_map;
 
-	fill_img(data, set_color(0, 0, 0, 0));
-	trans_map = renderer(data, 0, 0, 0);
+	fill_img(&fdf->data, set_color(0, 0, 0, 0));
+	trans_map = renderer(fdf, 0, 0, 0);
 	if (trans_map == NULL)
 		exit(1);
-	draw_map(data, trans_map);
+	draw_map(fdf, trans_map);
 	free(trans_map);
-	mlx_put_image_to_window(data->mlx, data->win.win, data->img.img, 0, 0);
-	data->time++;
+	mlx_put_image_to_window(fdf->data.mlx, fdf->data.win.win, fdf->data.img.img, 0, 0);
+	fdf->data.time++;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 04:26:54 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/06 05:22:24 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:45:06 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	error_msg(int error_code)
 	return (0);
 }
 
-void	null_checker(t_data *data, void *value, int error_code)
+void	null_checker(t_fdf *fdf, void *value, int error_code)
 {
 	if (value == NULL)
 	{
 		error_msg(error_code);
-		terminate_prog(data, EXIT_FAILURE);
+		terminate_prog(fdf, EXIT_FAILURE);
 	}
 	return ;
 }

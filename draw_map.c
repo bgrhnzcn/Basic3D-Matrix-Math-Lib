@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:25:32 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/06 15:32:51 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:46:55 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	draw_map_ver(t_data *d, t_vec3 *tr_map, t_color *ver_col)
+static void	draw_map_ver(t_fdf *d, t_vec3 *tr_map, t_color *ver_col)
 {
 	int			i;
 	int			j;
@@ -25,7 +25,7 @@ static void	draw_map_ver(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 		while (i < d->map->map_y -1)
 		{
 			k = (i * d->map->map_x) + j;
-			gradient_line(&d->img, tr_map[k], tr_map[k + d->map->map_x],
+			gradient_line(&d->data.img, tr_map[k], tr_map[k + d->map->map_x],
 				set_gradient(ver_col[k], ver_col[k + d->map->map_x]));
 			i++;
 		}
@@ -33,7 +33,7 @@ static void	draw_map_ver(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 	}
 }
 
-static void	draw_map_hor(t_data *d, t_vec3 *tr_map, t_color *ver_col)
+static void	draw_map_hor(t_fdf *d, t_vec3 *tr_map, t_color *ver_col)
 {
 	int			i;
 	int			j;
@@ -46,7 +46,7 @@ static void	draw_map_hor(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 		while (j < d->map->map_x -1)
 		{
 			k = (i * d->map->map_x) + j;
-			gradient_line(&d->img, tr_map[k], tr_map[k + 1],
+			gradient_line(&d->data.img, tr_map[k], tr_map[k + 1],
 				set_gradient(ver_col[k], ver_col[k + 1]));
 			j++;
 		}
@@ -54,7 +54,7 @@ static void	draw_map_hor(t_data *d, t_vec3 *tr_map, t_color *ver_col)
 	}
 }
 
-void	draw_map(t_data *d, t_vec3 *tr_map)
+void	draw_map(t_fdf *d, t_vec3 *tr_map)
 {
 	t_color		*ver_col;
 

@@ -6,7 +6,7 @@
 /*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2024/01/09 17:57:25 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:47:36 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <errno.h>
-# include "structs.h"
+# include "fdf_structs.h"
 # include "libft.h"
 # include "mlx.h"
 # include "ft_printf.h"
@@ -78,23 +78,21 @@
 # define INVALID_FORMAT	0
 # define LOAD_ERROR		1
 # define MLX_ERROR		2
-//Math Value
-# define PI				3.14159265358979323846
 
 //----------------------- Error And Input Handling ---------------------
 
 //Initialization function for main process.
-void		main_init(t_data *data, char *obj_path);
+void		main_init(t_fdf *fdf, char *obj_path);
 //Function for displaying error messages.
 int			error_msg(int error_code);
 //Terminating program without leak.
-int			terminate_prog(t_data *data, int exit_state);
+int			terminate_prog(t_fdf *fdf, int exit_state);
 //Null-Checker with easy exit.
-void		null_checker(t_data *data, void *value, int error_code);
+void		null_checker(t_fdf *fdf, void *value, int error_code);
 //Input manager function.
-int			input(int keycode, t_data *data);
+int			input(int keycode, t_fdf *fdf);
 //Function for real-time render.
-int			update(t_data *data);
+int			update(t_fdf *fdf);
 
 /*Gets numbers of strings inside of string arrays.
 String arrays must be null-ended.*/
@@ -122,78 +120,6 @@ double		lerp(double val, double min, double max);
 //This function uses t_map to convert value from one range to another.
 double		map(double val, t_map map);
 
-//------------------ Basic Vector Operations -----------------------------
-
-//2D vector setter.
-t_vec2		vec2_set(double x, double y);
-//2D vector substraction.
-t_vec2		vec2_sub(t_vec2	vec1, t_vec2 vec2);
-//2D vector addition.
-t_vec2		vec2_add(t_vec2 vec1, t_vec2 vec2);
-//2D vector multiplication.
-t_vec2		vec2_mul(t_vec2 vec, double mul);
-//2D vector division.
-t_vec2		vec2_div(t_vec2 vec, double div);
-
-//3D vector setter.
-t_vec3		vec3_set(double x, double y, double z);
-//3D vector substraction.
-t_vec3		vec3_sub(t_vec3	vec1, t_vec3 vec2);
-//3D vector addition.
-t_vec3		vec3_add(t_vec3 vec1, t_vec3 vec2);
-//3D vector multiplication.
-t_vec3		vec3_mul(t_vec3 vec, double mul);
-//3D vector division.
-t_vec3		vec3_div(t_vec3 vec, double div);
-
-//4D vector setter.
-t_vec4		vec4_set(double x, double y, double z, double w);
-//4D vector substraction.
-t_vec4		vec4_sub(t_vec4 vec1, t_vec4 vec2);
-//4D vector addition.
-t_vec4		vec4_add(t_vec4 vec1, t_vec4 vec2);
-//4D vector multiplication.
-t_vec4		vec4_mul(t_vec4 vec, double mul);
-//4D vector division.
-t_vec4		vec4_div(t_vec4 vec, double div);
-
-/*This function normalizes 2D vectors.
-For detailed info https://en.wikipedia.org/wiki/Unit_vector */
-t_vec2		vec2_norm(t_vec2 vec);
-
-/*2D versions of dot product.
-For detailed info https://en.wikipedia.org/wiki/Dot_product */
-double		vec2_dot(t_vec2 vec1, t_vec2 vec2);
-//2D verison of distance function.
-double		get_dist2(t_vec2 point1, t_vec2 point);
-//2D version of magnitude function. This function gives lenght of 2D vectors.
-double		vec2_mag(t_vec2 vec);
-
-/*This function normalizes 3D vectors.
-For detailed info https://en.wikipedia.org/wiki/Unit_vector */
-t_vec3		vec3_norm(t_vec3 vec);
-/*This function gives result of cross product of two 3D vectors.
-For detailed info https://en.wikipedia.org/wiki/Cross_product */
-t_vec3		vec3_cross(t_vec3 vec1, t_vec3 vec2);
-
-/*3D versions of dot product.
-For detailed info https://en.wikipedia.org/wiki/Dot_product */
-double		vec3_dot(t_vec3 vec1, t_vec3 vec2);
-//3D verison of distance function.
-double		get_dist3(t_vec3 point1, t_vec3 point);
-//3D version of magnitude function. This function gives lenght of 3D vectors.
-double		vec3_mag(t_vec3 vec);
-
-/*This function normalizes 4D vectors.
-For detailed info https://en.wikipedia.org/wiki/Unit_vector */
-t_vec4		vec4_norm(t_vec4 vec);
-
-/*4D versions of dot product.
-For detailed info https://en.wikipedia.org/wiki/Dot_product */
-double		vec4_dot(t_vec4 vec1, t_vec4 vec2);
-//4D version of magnitude function. This function gives lenght of 4D vectors.
-double		vec4_mag(t_vec4 vec);
-
 //----------------------- Basic Graphics Pipeline --------------------------
 
 /*This function creates transformation matrix.
@@ -206,7 +132,7 @@ t_vec3		graphic_pipeline(t_mtx4 proj, t_mtx4 mtx_glob,
 /*This function uses defined pipeline to generate
 3D graphics to display 2D screen.
 Iterate throught all the points and apply pipeline.*/
-t_vec3		*renderer(t_data *d, int i, int j, int curr);
+t_vec3		*renderer(t_fdf *d, int i, int j, int curr);
 
 //------------------------------ Basic Matrix Functions ---------------------
 
@@ -233,22 +159,10 @@ t_vec4		vec3_to_vec4(t_vec3 vec3, double w);
 //4D vector to 3D vector conversion.
 t_vec3		vec4_to_vec3(t_vec4 vec4);
 
-//------------------------- Color Functions ---------------------------
-
-/*4 channel int value color setter.
-a = Alpha, r = Red, g = Green, b = Blue*/
-t_color		set_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
-//Returns gradient value from given normalized value.
-t_color		get_gradient_val(t_color from, t_color to, double value);
-//Gradient initializer.
-t_gradient	set_gradient(t_color from, t_color to);
-//Gradient inverter.
-t_gradient	inv_gradient(t_gradient in);
-
 //---------------------------- Draw Functions --------------------------
 void		gradient_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient grad);
-void		draw_map(t_data *d, t_vec3 *tr_map);
-int			draw_image(t_data *data);
+void		draw_map(t_fdf *d, t_vec3 *tr_map);
+int			draw_image(t_fdf *fdf);
 
 //------------------------------- FDF Map Functions ---------------------
 

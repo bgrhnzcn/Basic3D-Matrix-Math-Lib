@@ -6,7 +6,7 @@
 /*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:53:25 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/09 19:24:19 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:46:06 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,26 @@ t_fdf_map	*fdf_map_init(char *fdf_path)
 	return (map);
 }
 
-void	main_init(t_data *data, char *obj_path)
+void	main_init(t_fdf *fdf, char *obj_path)
 {
-	data->win.height = HEIGHT;
-	data->win.width = WIDTH;
-	data->mlx = mlx_init();
-	null_checker(data, data->mlx, MLX_ERROR);
-	data->proj_mtx = orto_init(set_ort_conf(vec4_set(
-					O_TOP, O_BOT, O_RIGHT, O_LEFT), vec2_set(O_NEAR, O_FAR)));
-	data->translation = vec3_set(0, 0, 0);
-	data->rotation = vec3_set(0, 0, 0);
-	data->scale = vec3_set(1, 1, 1);
-	mlx_do_key_autorepeaton(data->mlx);
-	data->map = fdf_map_init(obj_path);
-	null_checker(data, data->map, LOAD_ERROR);
+	fdf->data.win.height = HEIGHT;
+	fdf->data.win.width = WIDTH;
+	fdf->data.mlx = mlx_init();
+	null_checker(fdf, fdf->data.mlx, MLX_ERROR);
+	fdf->data.proj_mtx = orto_init(set_ort_conf(vec4_set(
+				O_TOP, O_BOT, O_RIGHT, O_LEFT), vec2_set(O_NEAR, O_FAR)));
+	fdf->translation = vec3_set(0, 0, 0);
+	fdf->rotation = vec3_set(0, 0, 0);
+	fdf->scale = vec3_set(1, 1, 1);
+	mlx_do_key_autorepeaton(fdf->data.mlx);
+	fdf->map = fdf_map_init(obj_path);
+	null_checker(fdf, fdf->map, LOAD_ERROR);
 	ft_printf("Map Loaded Succesfully...\n");
-	data->win.win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Test");
-	null_checker(data, data->win.win, MLX_ERROR);
-	data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	null_checker(data, data->img.img, MLX_ERROR);
-	data->img.data = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
-			&data->img.size_line, &data->img.endian);
-	null_checker(data, data->img.data, MLX_ERROR);
+	fdf->data.win.win = mlx_new_window(fdf->data.mlx, WIDTH, HEIGHT, "Test");
+	null_checker(fdf, fdf->data.win.win, MLX_ERROR);
+	fdf->data.img.img = mlx_new_image(fdf->data.mlx, WIDTH, HEIGHT);
+	null_checker(fdf, fdf->data.img.img, MLX_ERROR);
+	fdf->data.img.data = mlx_get_data_addr(fdf->data.img.img, &fdf->data.img.bits_per_pixel,
+			&fdf->data.img.size_line, &fdf->data.img.endian);
+	null_checker(fdf, fdf->data.img.data, MLX_ERROR);
 }
