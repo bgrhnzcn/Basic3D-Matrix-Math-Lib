@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:40:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/07 15:44:53 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:22:05 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int argc, char **argv)
 	main_init(data, obj_path);
 	ft_printf("Running...");
 	data->time = 0;
-	mlx_hook(data->win, 17, 0, terminate_prog, data);
-	mlx_hook(data->win, 2, 1, input, data);
+	mlx_hook(data->win.win, 17, 0, terminate_prog, data);
+	mlx_hook(data->win.win, 2, 1, input, data);
 	mlx_loop_hook(data->mlx, update, data);
 	mlx_loop(data->mlx);
 	return (0);

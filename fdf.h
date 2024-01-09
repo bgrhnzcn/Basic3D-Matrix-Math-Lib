@@ -6,7 +6,7 @@
 /*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:51:23 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/13 18:41:10 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/09 17:57:25 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,15 +194,6 @@ double		vec4_dot(t_vec4 vec1, t_vec4 vec2);
 //4D version of magnitude function. This function gives lenght of 4D vectors.
 double		vec4_mag(t_vec4 vec);
 
-//------------------------- Transformation Matrices ------------------------
-
-//This function translate any 3D vector to given values.
-t_vec3		mtx3_trans(double x, double y, double z, t_vec3 vec);
-//This function scale any 3D vector to given values.
-t_vec3		mtx3_scale(double x, double y, double z, t_vec3 vec);
-//This function rotate any 3D vector to given values.
-t_vec3		mtx3_rot(double x, double y, double z, t_vec3 vec);
-
 //----------------------- Basic Graphics Pipeline --------------------------
 
 /*This function creates transformation matrix.
@@ -255,22 +246,9 @@ t_gradient	set_gradient(t_color from, t_color to);
 t_gradient	inv_gradient(t_gradient in);
 
 //---------------------------- Draw Functions --------------------------
-void		put_pixel(t_img *img, int x, int y, t_color color);
-void		draw_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_color color);
 void		gradient_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient grad);
-void		draw_tri(t_data *data, t_tri *tris, int j, t_color color);
 void		draw_map(t_data *d, t_vec3 *tr_map);
 int			draw_image(t_data *data);
-void		fill_img(t_img *img, t_color color);
-
-//----------------------------- Mesh Functions -------------------------
-
-int			data_counter(int obj_file, char type);
-int			get_vertex_data(t_get_vert *ver);
-t_vec3		*get_vertices(char *obj_path, int *ver_count);
-int			get_triangle_data(t_get_tris *tris, t_vec3 *vertices);
-t_tri		*get_triangles(char *obj_path, t_vec3 *vertices, int *tri_count);
-t_mesh		mesh_init(char *obj_path);
 
 //------------------------------- FDF Map Functions ---------------------
 
@@ -278,12 +256,5 @@ int			fdf_get_size(t_fdf_data *d, t_fdf_map *map);
 int			fdf_map_init_color(t_fdf_data *d, t_fdf_map *map, char *path);
 t_fdf_map	*fdf_map_init(char *fdf_path);
 int			fdf_map_init_pos_data(t_fdf_data *d, t_fdf_map *map, char *path);
-
-//------------------------------ Projections ----------------------------
-
-//Orthographic projection initializer.
-t_mtx4		orto_init(void);
-//Perspective projection initializer.
-t_mtx4		pers_init(void);
 
 #endif

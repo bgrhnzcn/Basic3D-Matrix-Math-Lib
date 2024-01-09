@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/07 17:11:54 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:21:06 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef union u_color
 	};
 }	t_color;
 # else
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 typedef union u_color
 {
@@ -196,13 +202,38 @@ typedef struct s_fdf_data
 	int			j;
 }	t_fdf_data;
 
+typedef struct s_pers_conf
+{
+	float	aspect_ratio;
+	float	field_of_view;
+	float	near_clip;
+	float	far_clip;
+}	t_pers_conf;
+
+typedef struct s_orto_conf
+{
+	float	top;
+	float	bot;
+	float	right;
+	float	left;
+	float	far;
+	float	near;
+}	t_orto_conf;
+
+typedef struct s_win
+{
+	void	*win;
+	int		width;
+	int		height;
+}	t_win;
+
 typedef struct s_data
 {
 	t_mtx4		proj_mtx;
 	t_mtx4		mtx_glob;
 	t_mtx4		mtx_loc;
 	void		*mlx;
-	void		*win;
+	t_win		win;
 	t_img		img;
 	int			time;
 	t_fdf_map	*map;

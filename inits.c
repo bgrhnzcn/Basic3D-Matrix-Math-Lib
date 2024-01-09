@@ -6,53 +6,11 @@
 /*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:53:25 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/13 18:43:49 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:24:19 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-t_mtx4	orto_init(void)
-{
-	t_mtx4	mtx;
-	t_vec4	col1;
-	t_vec4	col2;
-	t_vec4	col3;
-	t_vec4	col4;
-
-	col1 = vec4_set(2 / (O_RIGHT - O_LEFT), 0, 0, 0);
-	col2 = vec4_set(0, 2 / (O_TOP - O_BOT), 0, 0);
-	col3 = vec4_set(0, 0, -2 / (O_FAR - O_NEAR), 0);
-	col4 = vec4_set(-((O_RIGHT + O_LEFT) / (O_RIGHT - O_LEFT)),
-			-((O_TOP + O_BOT) / (O_TOP - O_BOT)),
-			-((O_FAR + O_NEAR) / (O_FAR - O_NEAR)), 1);
-	mtx.col1 = col1;
-	mtx.col2 = col2;
-	mtx.col3 = col3;
-	mtx.col4 = col4;
-	return (mtx);
-}
-
-t_mtx4	pers_init(void)
-{
-	t_mtx4	mtx;
-	t_vec4	col1;
-	t_vec4	col2;
-	t_vec4	col3;
-	t_vec4	col4;
-
-	col1 = vec4_set(P_ASPECT_R / (tan(deg_to_rad(P_FOV) / 2)), 0, 0, 0);
-	col2 = vec4_set(0, 1 / tan(deg_to_rad(P_FOV) / 2), 0, 0);
-	col3 = vec4_set(0, 0,
-			-(P_NEAR_CLIP + P_FAR_CLIP) / (P_NEAR_CLIP - P_FAR_CLIP), 1);
-	col4 = vec4_set(0, 0,
-			(2 * P_FAR_CLIP * P_NEAR_CLIP) / (P_NEAR_CLIP - P_FAR_CLIP), 0);
-	mtx.col1 = col1;
-	mtx.col2 = col2;
-	mtx.col3 = col3;
-	mtx.col4 = col4;
-	return (mtx);
-}
 
 t_fdf_map	*fdf_map_init(char *fdf_path)
 {
@@ -80,9 +38,12 @@ t_fdf_map	*fdf_map_init(char *fdf_path)
 
 void	main_init(t_data *data, char *obj_path)
 {
+	data->win.height = HEIGHT;
+	data->win.width = WIDTH;
 	data->mlx = mlx_init();
 	null_checker(data, data->mlx, MLX_ERROR);
-	data->proj_mtx = orto_init();
+	data->proj_mtx = orto_init(set_ort_conf(vec4_set(
+					O_TOP, O_BOT, O_RIGHT, O_LEFT), vec2_set(O_NEAR, O_FAR)));
 	data->translation = vec3_set(0, 0, 0);
 	data->rotation = vec3_set(0, 0, 0);
 	data->scale = vec3_set(1, 1, 1);
@@ -90,8 +51,8 @@ void	main_init(t_data *data, char *obj_path)
 	data->map = fdf_map_init(obj_path);
 	null_checker(data, data->map, LOAD_ERROR);
 	ft_printf("Map Loaded Succesfully...\n");
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Test");
-	null_checker(data, data->win, MLX_ERROR);
+	data->win.win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Test");
+	null_checker(data, data->win.win, MLX_ERROR);
 	data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	null_checker(data, data->img.img, MLX_ERROR);
 	data->img.data = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,

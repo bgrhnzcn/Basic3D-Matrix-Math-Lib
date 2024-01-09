@@ -3,37 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:42:40 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/07 15:46:04 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:49:59 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_tri(t_data *data, t_tri *tris, int j, t_color color)
-{
-	draw_line(&(data)->img, tris[j].pts[0],
-		tris[j].pts[1], color);
-	draw_line(&(data)->img, tris[j].pts[1],
-		tris[j].pts[2], color);
-	draw_line(&(data)->img, tris[j].pts[2],
-		tris[j].pts[0], color);
-}
-
-void	fill_img(t_img *img, t_color color)
+void	fill_img(t_data *dt, t_color color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < WIDTH)
+	while (i < dt->win.width)
 	{
 		j = 0;
-		while (j < HEIGHT)
+		while (j < dt->win.height)
 		{
-			put_pixel(img, i, j, color);
+			put_pixel(&dt->img, i, j, color);
 			j++;
 		}
 		i++;
@@ -66,13 +56,13 @@ int	draw_image(t_data *data)
 {
 	t_vec3		*trans_map;
 
-	fill_img(&data->img, set_color(0, 0, 0, 0));
+	fill_img(data, set_color(0, 0, 0, 0));
 	trans_map = renderer(data, 0, 0, 0);
 	if (trans_map == NULL)
 		exit(1);
 	draw_map(data, trans_map);
 	free(trans_map);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win.win, data->img.img, 0, 0);
 	data->time++;
 	return (0);
 }

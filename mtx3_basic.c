@@ -3,51 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mtx3_basic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:57:53 by buozcan           #+#    #+#             */
-/*   Updated: 2023/11/08 20:55:06 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:59:17 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-t_vec3	get_row3(t_mtx3 mtx, int row_val)
-{
-	t_vec3	vec_res;
-
-	if (row_val == 1)
-		vec_res = vec3_set(mtx.col1.x, mtx.col2.x, mtx.col3.x);
-	else if (row_val == 2)
-		vec_res = vec3_set(mtx.col1.y, mtx.col2.y, mtx.col3.y);
-	else if (row_val == 3)
-		vec_res = vec3_set(mtx.col1.z, mtx.col2.z, mtx.col3.z);
-	else
-		vec_res = vec3_set(0, 0, 0);
-	return (vec_res);
-}
-
-void	set_row3(t_mtx3 *mtx, int row_val, t_vec3 row)
-{
-	if (row_val == 1)
-	{
-		mtx->col1.x = row.x;
-		mtx->col2.x = row.y;
-		mtx->col3.x = row.z;
-	}
-	else if (row_val == 2)
-	{
-		mtx->col1.y = row.x;
-		mtx->col2.y = row.y;
-		mtx->col3.y = row.z;
-	}
-	else if (row_val == 3)
-	{
-		mtx->col1.z = row.x;
-		mtx->col2.z = row.y;
-		mtx->col3.z = row.z;
-	}
-}
 
 t_vec3	mtx_vec_mul3(t_mtx3 mtx, t_vec3 vec)
 {
@@ -63,14 +26,4 @@ t_vec3	mtx_vec_mul3(t_mtx3 mtx, t_vec3 vec)
 	vec_res.y = ((vec.x * col2.x) + (vec.y * col2.y) + (vec.z * col2.z));
 	vec_res.z = ((vec.x * col3.x) + (vec.y * col3.y) + (vec.z * col3.z));
 	return (vec_res);
-}
-
-t_mtx3	mtx_mtx_mul3(t_mtx3 mtx1, t_mtx3 mtx2)
-{
-	t_mtx3	mtx_res;
-
-	set_row3(&mtx_res, 1, mtx_vec_mul3(mtx2, get_row3(mtx1, 1)));
-	set_row3(&mtx_res, 2, mtx_vec_mul3(mtx2, get_row3(mtx1, 2)));
-	set_row3(&mtx_res, 3, mtx_vec_mul3(mtx2, get_row3(mtx1, 3)));
-	return (mtx_res);
 }

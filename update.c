@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 22:03:21 by buozcan           #+#    #+#             */
-/*   Updated: 2023/12/07 17:16:37 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:05:15 by buozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	update(t_data *data)
 		data->mtx_glob = transform_mtx(data->translation,
 				data->rotation, data->scale);
 		draw_image(data);
-		mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->win.win, data->img.img, 0, 0);
 	}
 	data->time++;
 	return (data->time);
